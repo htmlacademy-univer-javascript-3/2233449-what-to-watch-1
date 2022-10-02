@@ -1,5 +1,7 @@
-function App(): JSX.Element {
-  return <p>Hello, world!</p>;
+import Main, {FilmProps} from '../../pages/Main/Main';
+
+function App(props: FilmProps) {
+  return Main(props);
 }
 
 export default App;
