@@ -1,12 +1,13 @@
 import Logo from '../../components/logo';
-import Films from '../../FilmsList';
-import Card from '../../components/card_item';
 import renderActivePart from './render-active-part';
 import Footer from '../../components/footer';
+import UserBlock from '../../components/user-block';
+import FilmsList from '../../components/films-list';
+import {MainProps} from '../main/main';
+import {reviews} from '../../mocks/reviews';
 
-function MoviePage() {
-  const films = new Films();
-  let activePart = 'overview';
+function MoviePage(props: MainProps) {
+  const activePart = 'overview';
   return (
     <>
       <section className="film-card film-card--full">
@@ -19,16 +20,7 @@ function MoviePage() {
 
           <header className="page-header film-card__head">
             <Logo className="logo__link"/>
-            <ul className="user-block">
-              <li className="user-block__item">
-                <div className="user-block__avatar">
-                  <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
-                </div>
-              </li>
-              <li className="user-block__item">
-                <a className="user-block__link">Sign out</a>
-              </li>
-            </ul>
+            <UserBlock/>
           </header>
 
           <div className="film-card__wrap">
@@ -69,7 +61,9 @@ function MoviePage() {
             <div className="film-card__desc">
               <nav className="film-nav film-card__nav">
                 <ul className="film-nav__list">
-                  <li className={activePart === 'overview' ? 'film-nav__item' : 'film-nav__item film-nav__item--active'}>
+                  <li
+                    className={activePart === 'overview' ? 'film-nav__item' : 'film-nav__item film-nav__item--active'}
+                  >
                     <a href="#" className="film-nav__link">Overview</a>
                   </li>
                   <li className={activePart === 'details' ? 'film-nav__item' : 'film-nav__item film-nav__item--active'}>
@@ -80,7 +74,7 @@ function MoviePage() {
                   </li>
                 </ul>
               </nav>
-              {renderActivePart(activePart)}
+              {renderActivePart(activePart, props.films[0], reviews)}
             </div>
           </div>
         </div>
@@ -90,15 +84,7 @@ function MoviePage() {
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
 
-          <div className="catalog__films-list">
-            <Card image={films.GrindelwaldImageData} href='film-page.html'
-              name='Fantastic Beasts: The Crimes of Grindelwald'
-            />
-            <Card image={films.RhapsodyImageData} href='film-page.html' name='Bohemian Rhapsody'/>
-            <Card image={films.MacbethImageData} href='film-page.html' name='Macbeth'/>
-            <Card image={films.AviatorImageData} href='film-page.html' name='Aviator'/>
-
-          </div>
+          <FilmsList films={props.films}/>
         </section>
         <Footer/>
       </div>

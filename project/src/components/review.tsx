@@ -1,4 +1,4 @@
-interface ReviewProps {
+export type ReviewProps = {
   text: string,
   author: string,
   date: string,

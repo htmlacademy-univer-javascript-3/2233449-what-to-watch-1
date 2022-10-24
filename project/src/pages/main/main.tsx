@@ -1,16 +1,18 @@
-import Card from '../../components/card_item';
-import Films from '../../FilmsList';
+import Card from '../../components/card-item';
 import Logo from '../../components/logo';
 import Footer from '../../components/footer';
+import {Film} from '../../mocks/films';
+import {Genre} from '../../mocks/genres';
+import GenresItem from '../../components/genres-item';
+import UserBlock from '../../components/user-block';
+import FilmsList from '../../components/films-list';
 
-export interface FilmProps {
-  filmName: string;
-  filmGenre: string;
-  filmDate: string;
+export type MainProps = {
+  films: Film[]
+  genres: Genre[],
 }
 
-function Main({filmName, filmGenre, filmDate}: FilmProps) {
-  const films = new Films();
+function Main(props: MainProps) {
   return (
     <>
       <section className='film-card'>
@@ -22,16 +24,7 @@ function Main({filmName, filmGenre, filmDate}: FilmProps) {
 
         <header className='page-header film-card__head'>
           <Logo className="logo__link"/>
-          <ul className='user-block'>
-            <li className='user-block__item'>
-              <div className='user-block__avatar'>
-                <img src='img/avatar.jpg' alt='User avatar' width='63' height='63'/>
-              </div>
-            </li>
-            <li className='user-block__item'>
-              <a className='user-block__link'>Sign out</a>
-            </li>
-          </ul>
+          <UserBlock/>
         </header>
 
         <div className='film-card__wrap'>
@@ -43,10 +36,10 @@ function Main({filmName, filmGenre, filmDate}: FilmProps) {
             </div>
 
             <div className='film-card__desc'>
-              <h2 className='film-card__title'>{filmName}</h2>
+              <h2 className='film-card__title'>{props.films[0].name}</h2>
               <p className='film-card__meta'>
-                <span className='film-card__genre'>{filmGenre}</span>
-                <span className='film-card__year'>{filmDate}</span>
+                <span className='film-card__genre'>{props.films[0].genre}</span>
+                <span className='film-card__year'>{props.films[0].date}</span>
               </p>
 
               <div className='film-card__buttons'>
@@ -74,65 +67,11 @@ function Main({filmName, filmGenre, filmDate}: FilmProps) {
           <h2 className='catalog__title visually-hidden'>Catalog</h2>
 
           <ul className='catalog__genres-list'>
-            <li className='catalog__genres-item catalog__genres-item--active'>
-              <a href='#' className='catalog__genres-link'>All genres</a>
-            </li>
-            <li className='catalog__genres-item'>
-              <a href='#' className='catalog__genres-link'>Comedies</a>
-            </li>
-            <li className='catalog__genres-item'>
-              <a href='#' className='catalog__genres-link'>Crime</a>
-            </li>
-            <li className='catalog__genres-item'>
-              <a href='#' className='catalog__genres-link'>Documentary</a>
-            </li>
-            <li className='catalog__genres-item'>
-              <a href='#' className='catalog__genres-link'>Dramas</a>
-            </li>
-            <li className='catalog__genres-item'>
-              <a href='#' className='catalog__genres-link'>Horror</a>
-            </li>
-            <li className='catalog__genres-item'>
-              <a href='#' className='catalog__genres-link'>Kids & Family</a>
-            </li>
-            <li className='catalog__genres-item'>
-              <a href='#' className='catalog__genres-link'>Romance</a>
-            </li>
-            <li className='catalog__genres-item'>
-              <a href='#' className='catalog__genres-link'>Sci-Fi</a>
-            </li>
-            <li className='catalog__genres-item'>
-              <a href='#' className='catalog__genres-link'>Thrillers</a>
-            </li>
+            <GenresItem name={'All genres'} isActive/>
+            {props.genres.map((genre) => <GenresItem name={genre.name} isActive={false}/>)}
           </ul>
 
-          <div className='catalog__films-list'>
-            <Card image={films.GrindelwaldImageData} href='film-page.html'
-              name='Fantastic Beasts: The Crimes of Grindelwald'
-            />
-            <Card image={films.RhapsodyImageData} href='film-page.html' name='Bohemian Rhapsody'/>
-            <Card image={films.MacbethImageData} href='film-page.html' name='Macbeth'/>
-            <Card image={films.AviatorImageData} href='film-page.html' name='Aviator'/>
-            <Card image={films.WeNeedToTalkAboutKevinImageData} href='film-page.html'
-              name='We need to talk about Kevin'
-            />
-            <Card image={films.WhatWeDointheShadowsImageData} href='film-page.html' name='What We Do in the Shadows'/>
-            <Card image={films.RevenantImageData} href='film-page.html' name='Revenant'/>
-            <Card image={films.JohnnyEnglishImageData} href='film-page.html' name='Johnny English'/>
-            <Card image={films.ShutterIslandImageData} href='film-page.html' name='Shutter Island'/>
-            <Card image={films.PulpFictionImageData} href='film-page.html' name='Pulp Fiction'/>
-            <Card image={films.NoCountryforOldMenImageData} href='film-page.html' name='No Country for Old Men'/>
-            <Card image={films.SnatchImageData} href='film-page.html' name='Snatch'/>
-            <Card image={films.MoonriseKingdomImageData} href='film-page.html' name='Moonrise Kingdom'/>
-            <Card image={films.SevenYearsinTibetImageData} href='film-page.html' name='Seven Years in Tibet'/>
-            <Card image={films.MidnightSpecialImageData} href='film-page.html' name='Midnight Special'/>
-            <Card image={films.WaroftheWorldsImageData} href='film-page.html' name='War of the Worlds'/>
-            <Card image={films.DardjeelingLimitedImageData} href='film-page.html' name='Dardjeeling Limited'/>
-            <Card image={films.OrlandoImageData} href='film-page.html' name='Orlando'/>
-            <Card image={films.MindhunterImageData} href='film-page.html' name='Mindhunter'/>
-            <Card image={films.MidnightSpecialImageData} href='film-page.html' name='Midnight Special'/>
-
-          </div>
+          <FilmsList films={props.films}/>
 
           <div className='catalog__more'>
             <button className='catalog__button' type='button'>Show more</button>

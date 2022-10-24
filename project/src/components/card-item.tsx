@@ -1,22 +1,16 @@
 interface CardProps {
-  image: ImageProps;
+  imagePath: string;
   name: string;
   href: string;
 }
 
-interface ImageProps {
-  imageName: string;
-  alt: string;
-  width: string;
-  height: string;
-}
 
-function Card({image, href, name}: CardProps) {
+function Card({imagePath, href, name}: CardProps) {
   return (
     <article className="small-film-card catalog__films-card">
       <div className="small-film-card__image">
-        <img src={image.imageName}
-          alt={image.alt} width={image.width} height={image.height}
+        <img src={imagePath}
+          alt={name} width={280} height={175}
         />
       </div>
       <h3 className="small-film-card__title">
