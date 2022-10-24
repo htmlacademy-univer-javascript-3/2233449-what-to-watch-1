@@ -1,11 +1,11 @@
 import Logo from '../../components/logo';
-import {renderSignInError} from "./sign-in-error";
-import {renderSignInMessage} from "./sign-in-message";
-import Footer from "../../components/footer";
+import {renderSignInError} from './sign-in-error';
+import {renderSignInMessage} from './sign-in-message';
+import Footer from '../../components/footer';
 
 function SignIn() {
-  let isError = false;
-  let isSignInMessage = false;
+  const isError = false;
+  const isSignInMessage = false;
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
@@ -15,9 +15,15 @@ function SignIn() {
 
       <div className="sign-in user-page__content">
         <form action="#" className="sign-in__form">
-          {isError ? renderSignInError() : isSignInMessage ? renderSignInMessage() : <></>}
+          {(() => {
+            if (isError) {
+              return renderSignInError()
+            } else if (isSignInMessage) {
+              return renderSignInMessage()
+            }
+          })()}
           <div className="sign-in__fields">
-            <div className={isError ? "sign-in__field sign-in__field--error" : "sign-in__field"}>
+            <div className={isError ? 'sign-in__field sign-in__field--error' : 'sign-in__field'}>
               <input className="sign-in__input" type="email" placeholder="Email address" name="user-email"
                      id="user-email"
               />

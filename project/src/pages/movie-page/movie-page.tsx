@@ -2,11 +2,11 @@ import Logo from '../../components/logo';
 import Films from '../../FilmsList';
 import Card from '../../components/card_item';
 import renderActivePart from './render-active-part';
-import Footer from "../../components/footer";
+import Footer from '../../components/footer';
 
 function MoviePage() {
   const films = new Films();
-  let activePart = "overview"
+  const activePart = 'overview';
   return (
     <>
       <section className="film-card film-card--full">
@@ -63,26 +63,24 @@ function MoviePage() {
           <div className="film-card__info">
             <div className="film-card__poster film-card__poster--big">
               <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster"
-                   width="218" height="327"
+                width="218" height="327"
               />
             </div>
             <div className="film-card__desc">
               <nav className="film-nav film-card__nav">
                 <ul className="film-nav__list">
-                  <li className={activePart == "overview" ? "film-nav__item" : "film-nav__item film-nav__item--active"}>
+                  <li className={activePart == 'overview' ? 'film-nav__item' : 'film-nav__item film-nav__item--active'}>
                     <a href="#" className="film-nav__link">Overview</a>
                   </li>
-                  <li className={activePart == "details" ? "film-nav__item" : "film-nav__item film-nav__item--active"}>
+                  <li className={activePart == 'details' ? 'film-nav__item' : 'film-nav__item film-nav__item--active'}>
                     <a href="#" className="film-nav__link">Details</a>
                   </li>
-                  <li className={activePart == "review" ? "film-nav__item" : "film-nav__item film-nav__item--active"}>
+                  <li className={activePart == 'review' ? 'film-nav__item' : 'film-nav__item film-nav__item--active'}>
                     <a href="#" className="film-nav__link">Reviews</a>
                   </li>
                 </ul>
               </nav>
-              <>
-                {renderActivePart(activePart)}
-              </>
+              {renderActivePart(activePart)}
             </div>
           </div>
         </div>
@@ -94,7 +92,7 @@ function MoviePage() {
 
           <div className="catalog__films-list">
             <Card image={films.GrindelwaldImageData} href='film-page.html'
-                  name='Fantastic Beasts: The Crimes of Grindelwald'
+              name='Fantastic Beasts: The Crimes of Grindelwald'
             />
             <Card image={films.RhapsodyImageData} href='film-page.html' name='Bohemian Rhapsody'/>
             <Card image={films.MacbethImageData} href='film-page.html' name='Macbeth'/>

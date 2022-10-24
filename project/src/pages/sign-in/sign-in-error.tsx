@@ -1,7 +1,7 @@
 export function renderSignInError() {
   return (
     <div className="sign-in__message">
-      	<p>Please enter a valid email address</p>
+      <p>Please enter a valid email address</p>
     </div>
   );
 }

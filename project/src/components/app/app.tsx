@@ -1,4 +1,4 @@
-import Main, {FilmProps} from '../../pages/Main/main';
+import Main, {FilmProps} from '../../pages/main/main';
 
 function App(props: FilmProps) {
   return Main(props);

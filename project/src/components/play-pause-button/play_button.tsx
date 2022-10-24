@@ -6,5 +6,5 @@ export function RenderPlayButton() {
       </svg>
       <span>Play</span>
     </button>
-  )
+  );
 }

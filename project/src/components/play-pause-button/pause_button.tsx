@@ -6,5 +6,5 @@ export function RenderPauseButton() {
       </svg>
       <span>Pause</span>
     </button>
-  )
+  );
 }

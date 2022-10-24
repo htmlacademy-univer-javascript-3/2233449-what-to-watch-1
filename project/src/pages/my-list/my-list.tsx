@@ -1,7 +1,7 @@
 import Card from '../../components/card_item';
 import Films from '../../FilmsList';
 import Logo from '../../components/logo';
-import Footer from "../../components/footer";
+import Footer from '../../components/footer';
 
 function MyList() {
   const films = new Films();
@@ -27,7 +27,8 @@ function MyList() {
 
         <div className="catalog__films-list">
           <Card image={films.GrindelwaldImageData} href='film-page.html'
-                name='Fantastic Beasts: The Crimes of Grindelwald'/>
+            name='Fantastic Beasts: The Crimes of Grindelwald'
+          />
           <Card image={films.RhapsodyImageData} href='film-page.html' name='Bohemian Rhapsody'/>
           <Card image={films.MacbethImageData} href='film-page.html' name='Macbeth'/>
           <Card image={films.AviatorImageData} href='film-page.html' name='Aviator'/>

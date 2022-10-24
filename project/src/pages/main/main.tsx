@@ -1,7 +1,7 @@
 import Card from '../../components/card_item';
 import Films from '../../FilmsList';
 import Logo from '../../components/logo';
-import Footer from "../../components/footer";
+import Footer from '../../components/footer';
 
 export interface FilmProps {
   filmName: string;
@@ -38,7 +38,7 @@ function Main({filmName, filmGenre, filmDate}: FilmProps) {
           <div className='film-card__info'>
             <div className='film-card__poster'>
               <img src='img/the-grand-budapest-hotel-poster.jpg' alt='The Grand Budapest Hotel poster'
-                   width='218' height='327'
+                width='218' height='327'
               />
             </div>
 
@@ -108,13 +108,14 @@ function Main({filmName, filmGenre, filmDate}: FilmProps) {
 
           <div className='catalog__films-list'>
             <Card image={films.GrindelwaldImageData} href='film-page.html'
-                  name='Fantastic Beasts: The Crimes of Grindelwald'
+              name='Fantastic Beasts: The Crimes of Grindelwald'
             />
             <Card image={films.RhapsodyImageData} href='film-page.html' name='Bohemian Rhapsody'/>
             <Card image={films.MacbethImageData} href='film-page.html' name='Macbeth'/>
             <Card image={films.AviatorImageData} href='film-page.html' name='Aviator'/>
             <Card image={films.WeNeedToTalkAboutKevinImageData} href='film-page.html'
-                  name='We need to talk about Kevin'/>
+              name='We need to talk about Kevin'
+            />
             <Card image={films.WhatWeDointheShadowsImageData} href='film-page.html' name='What We Do in the Shadows'/>
             <Card image={films.RevenantImageData} href='film-page.html' name='Revenant'/>
             <Card image={films.JohnnyEnglishImageData} href='film-page.html' name='Johnny English'/>

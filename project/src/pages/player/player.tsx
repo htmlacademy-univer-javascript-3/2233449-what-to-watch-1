@@ -1,8 +1,8 @@
-import {RenderPauseButton} from "../../components/play-pause-button/pause_button";
-import {RenderPlayButton} from "../../components/play-pause-button/play_button";
+import {RenderPauseButton} from '../../components/play-pause-button/pause_button';
+import {RenderPlayButton} from '../../components/play-pause-button/play_button';
 
 function Player() {
-  let isPlay = true;
+  const isPlay = true;
   return (
     <div className="player">
       <video src="#" className="player__video" poster="img/player-poster.jpg"/>
