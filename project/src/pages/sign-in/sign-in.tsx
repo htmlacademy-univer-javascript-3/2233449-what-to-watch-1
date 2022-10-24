@@ -45,3 +45,5 @@ function SignIn() {
     </div>
   );
 }
+
+export default SignIn;

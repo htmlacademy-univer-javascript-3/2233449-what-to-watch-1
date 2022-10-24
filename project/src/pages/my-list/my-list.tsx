@@ -43,3 +43,5 @@ function MyList() {
     </div>
   );
 }
+
+export default MyList;

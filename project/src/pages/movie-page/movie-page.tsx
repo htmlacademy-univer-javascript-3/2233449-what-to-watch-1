@@ -6,7 +6,7 @@ import Footer from '../../components/footer';
 
 function MoviePage() {
   const films = new Films();
-  const activePart = 'overview';
+  let activePart = 'overview';
   return (
     <>
       <section className="film-card film-card--full">
@@ -105,3 +105,5 @@ function MoviePage() {
     </>
   );
 }
+
+export default MoviePage;

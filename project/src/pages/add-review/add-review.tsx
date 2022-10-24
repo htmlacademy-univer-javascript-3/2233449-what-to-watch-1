@@ -91,3 +91,5 @@ function AddReview() {
     </section>
   );
 }
+
+export default AddReview;
