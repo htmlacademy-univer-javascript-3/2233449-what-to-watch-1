@@ -1,4 +1,4 @@
-import {Navigate} from "react-router-dom";
+import {Navigate} from 'react-router-dom';
 
 type PrivateRouterProps = {
   isLogIn: boolean;
@@ -10,15 +10,15 @@ function PrivateRoute({isLogIn, destinationPage}: PrivateRouterProps) {
     <div>
       {
         (() => {
-            if (isLogIn) {
-              return destinationPage
-            } else {
-              return <Navigate to={'/login'}/>
-            }
+          if (isLogIn) {
+            return destinationPage;
+          } else {
+            return <Navigate to={'/login'}/>;
           }
+        }
         )()
       }
-    </div>)
+    </div>);
 }
 
 export default PrivateRoute;

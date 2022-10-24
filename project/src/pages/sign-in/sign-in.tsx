@@ -17,21 +17,21 @@ function SignIn() {
         <form action="#" className="sign-in__form">
           {(() => {
             if (isError) {
-              return renderSignInError()
+              return renderSignInError();
             } else if (isSignInMessage) {
-              return renderSignInMessage()
+              return renderSignInMessage();
             }
           })()}
           <div className="sign-in__fields">
             <div className={isError ? 'sign-in__field sign-in__field--error' : 'sign-in__field'}>
               <input className="sign-in__input" type="email" placeholder="Email address" name="user-email"
-                     id="user-email"
+                id="user-email"
               />
               <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
             </div>
             <div className="sign-in__field">
               <input className="sign-in__input" type="password" placeholder="Password" name="user-password"
-                     id="user-password"
+                id="user-password"
               />
               <label className="sign-in__label visually-hidden" htmlFor="user-password">Password</label>
             </div>
