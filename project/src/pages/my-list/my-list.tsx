@@ -1,9 +1,8 @@
-import Card from '../../components/card-item';
 import Logo from '../../components/logo';
 import Footer from '../../components/footer';
-import {Film} from "../../mocks/films";
-import UserBlock from "../../components/user-block";
-import FilmsList from "../../components/films-list";
+import {Film} from '../../mocks/films';
+import UserBlock from '../../components/user-block';
+import FilmsList from '../../components/films-list';
 
 export type FilmsProps = {
   films: Film[]

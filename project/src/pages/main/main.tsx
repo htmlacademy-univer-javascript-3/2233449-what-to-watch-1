@@ -1,4 +1,3 @@
-import Card from '../../components/card-item';
 import Logo from '../../components/logo';
 import Footer from '../../components/footer';
 import {Film} from '../../mocks/films';
@@ -12,12 +11,12 @@ export type MainProps = {
   genres: Genre[],
 }
 
-function Main(props: MainProps) {
+function Main({films, genres}: MainProps) {
   return (
     <>
       <section className='film-card'>
         <div className='film-card__bg'>
-          <img src='img/bg-the-grand-budapest-hotel.jpg' alt='The Grand Budapest Hotel'/>
+          <img src={films[0].bgImagePath} alt={films[0].name}/>
         </div>
 
         <h1 className='visually-hidden'>WTW</h1>
@@ -30,16 +29,16 @@ function Main(props: MainProps) {
         <div className='film-card__wrap'>
           <div className='film-card__info'>
             <div className='film-card__poster'>
-              <img src='img/the-grand-budapest-hotel-poster.jpg' alt='The Grand Budapest Hotel poster'
+              <img src={films[0].imagePath} alt={films[0].imagePath}
                 width='218' height='327'
               />
             </div>
 
             <div className='film-card__desc'>
-              <h2 className='film-card__title'>{props.films[0].name}</h2>
+              <h2 className='film-card__title'>{films[0].name}</h2>
               <p className='film-card__meta'>
-                <span className='film-card__genre'>{props.films[0].genre}</span>
-                <span className='film-card__year'>{props.films[0].date}</span>
+                <span className='film-card__genre'>{films[0].genre}</span>
+                <span className='film-card__year'>{films[0].date}</span>
               </p>
 
               <div className='film-card__buttons'>
@@ -54,7 +53,7 @@ function Main(props: MainProps) {
                     <use xlinkHref='#add'/>
                   </svg>
                   <span>My list</span>
-                  <span className='film-card__count'>9</span>
+                  <span className='film-card__count'>{films.length}</span>
                 </button>
               </div>
             </div>
@@ -68,10 +67,10 @@ function Main(props: MainProps) {
 
           <ul className='catalog__genres-list'>
             <GenresItem name={'All genres'} isActive/>
-            {props.genres.map((genre) => <GenresItem name={genre.name} isActive={false}/>)}
+            {genres.map((genre) => <GenresItem key={genre.id} name={genre.name} isActive={false}/>)}
           </ul>
 
-          <FilmsList films={props.films}/>
+          <FilmsList films={films}/>
 
           <div className='catalog__more'>
             <button className='catalog__button' type='button'>Show more</button>

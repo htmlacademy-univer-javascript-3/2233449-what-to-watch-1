@@ -1,11 +1,13 @@
+import {Link} from 'react-router-dom';
+
 interface CardProps {
-  imagePath: string;
-  name: string;
-  href: string;
+  imagePath: string,
+  name: string,
+  id: number
 }
 
 
-function Card({imagePath, href, name}: CardProps) {
+function Card({imagePath, name, id}: CardProps) {
   return (
     <article className="small-film-card catalog__films-card">
       <div className="small-film-card__image">
@@ -14,7 +16,7 @@ function Card({imagePath, href, name}: CardProps) {
         />
       </div>
       <h3 className="small-film-card__title">
-        <a className="small-film-card__link" href={href}>{name}</a>
+        <Link to={`/films/${id}`} className="small-film-card__link">{name}</Link>
       </h3>
     </article>
   );

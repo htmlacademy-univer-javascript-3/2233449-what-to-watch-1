@@ -1,14 +1,15 @@
 import Review, {ReviewProps} from '../../components/review';
 import {Film} from '../../mocks/films';
+import {ActivePart} from './movie-page';
 
 
-export default function renderActivePart(activePart: string, film:Film, reviews: ReviewProps[]) {
+export default function renderActivePart(activePart: ActivePart, film: Film, reviews: ReviewProps[]) {
   switch (activePart) {
-    case 'overview':
+    case ActivePart.OverviewPart:
       return renderInfo(film);
-    case 'review':
+    case ActivePart.ReviewPart:
       return renderReviews(reviews);
-    case 'details':
+    case ActivePart.DetailsPart:
       return renderDetails(film);
   }
 
@@ -18,20 +19,20 @@ function renderInfo(film: Film) {
   return (
     <>
       <div className="film-rating">
-        <div className="film-rating__score">{film.rating}</div>
+        <div className="film-rating__score">{film?.rating}</div>
         <p className="film-rating__meta">
-          <span className="film-rating__level">{film.ratingString}</span>
-          <span className="film-rating__count">{film.ratingCount} ratings</span>
+          <span className="film-rating__level">{film?.ratingString}</span>
+          <span className="film-rating__count">{film?.ratingCount} ratings</span>
         </p>
       </div>
 
       <div className="film-card__text">
-        <p>{film.description}</p>
+        <p>{film?.description}</p>
 
-        <p className="film-card__director"><strong>Director: {film.director}</strong></p>
+        <p className="film-card__director"><strong>Director: {film?.director}</strong></p>
 
         <p className="film-card__starring">
-          <strong>Starring: {film.starring}
+          <strong>Starring: {film?.starring}
             and other
           </strong>
         </p>
@@ -46,11 +47,11 @@ function renderDetails(film: Film) {
       <div className="film-card__text-col">
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Director</strong>
-          <span className="film-card__details-value">{film.director}</span>
+          <span className="film-card__details-value">{film?.director}</span>
         </p>
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Starring</strong>
-          <span className="film-card__details-value"> {film.starring.join('\r')}
+          <span className="film-card__details-value"> {film?.starring.join('\r')}
           </span>
         </p>
       </div>
@@ -58,15 +59,15 @@ function renderDetails(film: Film) {
       <div className="film-card__text-col">
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Run Time</strong>
-          <span className="film-card__details-value">{film.runTime}</span>
+          <span className="film-card__details-value">{film?.runTime}</span>
         </p>
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Genre</strong>
-          <span className="film-card__details-value">{film.genre}</span>
+          <span className="film-card__details-value">{film?.genre}</span>
         </p>
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Released</strong>
-          <span className="film-card__details-value">{film.genre}</span>
+          <span className="film-card__details-value">{film?.genre}</span>
         </p>
       </div>
     </div>
@@ -78,9 +79,13 @@ function renderReviews(reviews: ReviewProps[]) {
     <div className="film-card__reviews film-card__row">
       <div className="film-card__reviews-col">
         {reviews.map((review) =>
-          (<Review text={review.text} author={review.author} date={review.date}
-            dateText={review.dateText} rating={review.rating}
-          />))}
+          (
+            <Review key={review.id} text={review?.text} author={review?.author} date={review?.date}
+              dateText={review?.dateText} rating={review?.rating}
+              id={review.id}
+            />
+          )
+        )}
       </div>
     </div>
   );

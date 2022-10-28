@@ -10,7 +10,9 @@ export type Film = {
   director: string,
   description: string,
   starring: string[],
-  runTime: string
+  runTime: string,
+  videoLink: string,
+  bgImagePath:string
 }
 
 export const films: Film[] = [
@@ -28,7 +30,9 @@ export const films: Film[] = [
       '          Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave&apos;s friend and protege.\n' +
       '        ',
     starring: ['Bill Murray', 'Edward Norton', 'Jude Law', 'Willem Dafoe'],
-    runTime: '1h 39m'
+    runTime: '1:30:29',
+    videoLink: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
+    bgImagePath: 'img/bg-the-grand-budapest-hotel.jpg',
   },
 
   {
@@ -43,7 +47,9 @@ export const films: Film[] = [
     director: 'Hans Andersen',
     description: 'In the old forest..',
     starring: ['Bill Murray', 'Jude Law'],
-    runTime: '1h 50m'
+    runTime: '1:30:29',
+    videoLink: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
+    bgImagePath: 'img/bg-the-grand-budapest-hotel.jpg',
   },
 
   {
@@ -58,7 +64,9 @@ export const films: Film[] = [
     director: 'Someone',
     description: 'In the 1930s, the Grand Budapest shop two friends met',
     starring: ['Willem Dafoe', 'Mike W'],
-    runTime: '1h 39m'
+    runTime: '1:30:29',
+    videoLink: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
+    bgImagePath: 'img/bg-the-grand-budapest-hotel.jpg',
   },
   {
     id: 4,
@@ -67,12 +75,14 @@ export const films: Film[] = [
     genre: 'Drama',
     date: '2014',
     rating: '7,9',
-    ratingString: 'good',
+    ratingString: 'Good',
     ratingCount: 200,
     director: 'Salli',
     description: 'In the 1930s, Zero, a junior lobby boy, becomes Gustave&apos;s friend and protege.',
     starring: ['Jude Law', 'Willem Dafoe'],
-    runTime: '1h 39m'
+    runTime: '1:30:29',
+    videoLink: 'https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm',
+    bgImagePath: 'img/bg-the-grand-budapest-hotel.jpg',
   },
   {
     id: 5,
@@ -86,7 +96,9 @@ export const films: Film[] = [
     director: 'Wes Anderson',
     description: 'In the trees',
     starring: ['Tom S'],
-    runTime: '1h 19m'
+    runTime: '1:30:29',
+    videoLink: 'https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm',
+    bgImagePath: 'img/bg-the-grand-budapest-hotel.jpg',
   },
 
   {
@@ -102,7 +114,9 @@ export const films: Film[] = [
     description: ' Zero, a junior lobby boy, becomes Gustave&apos;s friend and protege.\n' +
       '        ',
     starring: ['Bill Dafoe'],
-    runTime: '1h 00m'
+    runTime: '1:30:29',
+    videoLink: 'https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm',
+    bgImagePath: 'img/bg-the-grand-budapest-hotel.jpg',
   },
 
   {
@@ -118,7 +132,9 @@ export const films: Film[] = [
     description: 'Ralph Fiennes' +
       '        ',
     starring: ['Bill Murray', 'Edward Norton', 'Jude Law', 'Willem Dafoe'],
-    runTime: '1h 49m'
+    runTime: '1:30:29',
+    videoLink: 'https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm',
+    bgImagePath: 'img/bg-the-grand-budapest-hotel.jpg',
   },
 
   {
@@ -128,11 +144,31 @@ export const films: Film[] = [
     genre: 'Drama',
     date: '2014',
     rating: '8,9',
-    ratingString: 'Not bad',
+    ratingString: 'Very good',
     ratingCount: 240,
     director: 'Andrey W',
     description: 'junior lobby boy, becomes Gustave&apos;s friend and protege.\n',
     starring: ['Bill M'],
-    runTime: '1h 59m'
+    runTime: '1:30:29',
+    videoLink: 'https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm',
+    bgImagePath: 'img/bg-the-grand-budapest-hotel.jpg',
+  },
+  {
+    id: 9,
+    name: 'The Grand Budapest Hotel',
+    imagePath: 'img/the-grand-budapest-hotel-poster.jpg',
+    bgImagePath: 'img/bg-the-grand-budapest-hotel.jpg',
+    genre: 'Drama',
+    date: '2014',
+    rating: '8,9',
+    ratingString: 'Very good',
+    ratingCount: 240,
+    director: 'Wes Anderson',
+    description: 'In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge\n' +
+      '          Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave&apos;s friend and protege.\n' +
+      '        ',
+    starring: ['Bill Murray', 'Edward Norton', 'Jude Law', 'Willem Dafoe'],
+    runTime: '1:30:29',
+    videoLink: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
   }
 ];

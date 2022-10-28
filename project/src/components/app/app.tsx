@@ -10,22 +10,24 @@ import PrivateRoute from './private-route';
 import {Film} from '../../mocks/films';
 import Main from '../../pages/main/main';
 import {Genre} from '../../mocks/genres';
+import {Review} from '../../mocks/reviews';
 
 type AppProps = {
   films: Film[],
-  genres: Genre[]
+  genres: Genre[],
+  reviews: Review[]
 }
 
-function App(props: AppProps):JSX.Element {
+function App(props: AppProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={Main(props)}/>
+        <Route path="/" element={<Main films={props.films} genres={props.genres}/>}/>
         <Route path="/login" element={<SignIn/>}/>
-        <Route path="/mylist" element={<PrivateRoute isLogIn={false} destinationPage={<MyList films={props.films}/>}/>}/>
-        <Route path="/films/:id" element={<MoviePage/>}/>
-        <Route path="/films/:id/review" element={<AddReview/>}/>
-        <Route path="/player/:id" element={<Player/>}/>
+        <Route path="/mylist" element={<PrivateRoute isLogIn destinationPage={<MyList films={props.films}/>}/>}/>
+        <Route path="/films/:id" element={<MoviePage films={props.films} reviews={props.reviews}/>}/>
+        <Route path="/films/:id/review" element={<AddReview films={props.films}/>}/>
+        <Route path="/player/:id" element={<Player films={props.films}/>}/>
         <Route path="/*" element={<NotFound/>}/>
       </Routes>
     </BrowserRouter>
