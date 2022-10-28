@@ -1,42 +1,49 @@
 import Logo from '../../components/logo';
-import Films from '../../FilmsList';
-import Card from '../../components/card_item';
 import renderActivePart from './render-active-part';
 import Footer from '../../components/footer';
+import UserBlock from '../../components/user-block';
+import {useState} from 'react';
+import {Link, useParams} from 'react-router-dom';
+import FilmsList from '../../components/films-list';
+import {Film} from '../../mocks/films';
+import {Review} from '../../mocks/reviews';
 
-function MoviePage() {
-  const films = new Films();
-  let activePart = 'overview';
+export enum ActivePart {
+  OverviewPart = 1,
+  DetailsPart = 2,
+  ReviewPart = 3
+}
+
+export type MoviePageProps = {
+  films: Film[],
+  reviews: Review[]
+}
+
+function MoviePage({films, reviews}: MoviePageProps) {
+  const params = useParams();
+  const id = Number(params.id) - 1;
+  const [activePagePart, setActivePagePart] = useState(ActivePart.OverviewPart);
   return (
     <>
       <section className="film-card film-card--full">
         <div className="film-card__hero">
           <div className="film-card__bg">
-            <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel"/>
+            <img src={films[id]?.bgImagePath} alt={films[id]?.name}/>
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
 
           <header className="page-header film-card__head">
             <Logo className="logo__link"/>
-            <ul className="user-block">
-              <li className="user-block__item">
-                <div className="user-block__avatar">
-                  <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
-                </div>
-              </li>
-              <li className="user-block__item">
-                <a className="user-block__link">Sign out</a>
-              </li>
-            </ul>
+            <UserBlock/>
           </header>
 
           <div className="film-card__wrap">
             <div className="film-card__desc">
-              <h2 className="film-card__title">The Grand Budapest Hotel</h2>
+              <h2 className="film-card__title">{films[id]?.name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">Drama</span>
-                <span className="film-card__year">2014</span>
+                <span className="film-card__genre">{films[id]?.genre}</span>
+                <span className="film-card__year">{films[id]?.date}</span>
               </p>
 
               <div className="film-card__buttons">
@@ -51,9 +58,9 @@ function MoviePage() {
                     <use xlinkHref="#add"/>
                   </svg>
                   <span>My list</span>
-                  <span className="film-card__count">9</span>
+                  <span className="film-card__count">{films.length}</span>
                 </button>
-                <a href="add-review.html" className="btn film-card__button">Add review</a>
+                <Link to={`/films/${id + 1}/review`} className="btn film-card__button">Add review</Link>
               </div>
             </div>
           </div>
@@ -62,25 +69,31 @@ function MoviePage() {
         <div className="film-card__wrap film-card__translate-top">
           <div className="film-card__info">
             <div className="film-card__poster film-card__poster--big">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster"
+              <img src={films[id]?.imagePath} alt={`${films[id]?.name} poster`}
                 width="218" height="327"
               />
             </div>
             <div className="film-card__desc">
               <nav className="film-nav film-card__nav">
                 <ul className="film-nav__list">
-                  <li className={activePart === 'overview' ? 'film-nav__item' : 'film-nav__item film-nav__item--active'}>
+                  <li
+                    className={activePagePart === ActivePart.OverviewPart ? 'film-nav__item film-nav__item--active' : 'film-nav__item'}
+                  >
                     <a href="#" className="film-nav__link">Overview</a>
                   </li>
-                  <li className={activePart === 'details' ? 'film-nav__item' : 'film-nav__item film-nav__item--active'}>
-                    <a href="#" className="film-nav__link">Details</a>
+                  <li
+                    className={activePagePart === ActivePart.DetailsPart ? 'film-nav__item film-nav__item--active' : 'film-nav__item'}
+                  >
+                    <Link to="#" className="film-nav__link">Details</Link>
                   </li>
-                  <li className={activePart === 'review' ? 'film-nav__item' : 'film-nav__item film-nav__item--active'}>
-                    <a href="#" className="film-nav__link">Reviews</a>
+                  <li
+                    className={activePagePart === ActivePart.ReviewPart ? 'film-nav__item film-nav__item--active' : 'film-nav__item'}
+                  >
+                    <Link to="#" className="film-nav__link">Reviews</Link>
                   </li>
                 </ul>
               </nav>
-              {renderActivePart(activePart)}
+              {renderActivePart(activePagePart, films[id], reviews)}
             </div>
           </div>
         </div>
@@ -90,15 +103,7 @@ function MoviePage() {
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
 
-          <div className="catalog__films-list">
-            <Card image={films.GrindelwaldImageData} href='film-page.html'
-              name='Fantastic Beasts: The Crimes of Grindelwald'
-            />
-            <Card image={films.RhapsodyImageData} href='film-page.html' name='Bohemian Rhapsody'/>
-            <Card image={films.MacbethImageData} href='film-page.html' name='Macbeth'/>
-            <Card image={films.AviatorImageData} href='film-page.html' name='Aviator'/>
-
-          </div>
+          {<FilmsList films={films}/>}
         </section>
         <Footer/>
       </div>

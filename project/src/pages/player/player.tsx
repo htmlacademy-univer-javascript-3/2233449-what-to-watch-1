@@ -1,11 +1,16 @@
 import {RenderPauseButton} from '../../components/play-pause-button/pause_button';
 import {RenderPlayButton} from '../../components/play-pause-button/play_button';
+import {FilmsProps} from '../my-list/my-list';
+import {useState} from 'react';
+import {useParams} from 'react-router-dom';
 
-function Player() {
-  const isPlay = true;
+function Player({films}: FilmsProps) {
+  const params = useParams();
+  const id = Number(params.id) - 1;
+  const [isPlay, setIsPlay] = useState(true);
   return (
     <div className="player">
-      <video src="#" className="player__video" poster="img/player-poster.jpg"/>
+      <video src={films[id]?.videoLink} className="player__video" poster={films[id]?.imagePath}/>
 
       <button type="button" className="player__exit">Exit</button>
 
@@ -15,7 +20,7 @@ function Player() {
             <progress className="player__progress" value="30" max="100"/>
             <div className="player__toggler" style={{left: '30%'}}>Toggler</div>
           </div>
-          <div className="player__time-value">1:30:29</div>
+          <div className="player__time-value">{films[id]?.runTime}</div>
         </div>
 
         <div className="player__controls-row">
