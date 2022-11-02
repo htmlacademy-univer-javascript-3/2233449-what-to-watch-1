@@ -1,22 +1,50 @@
 import {Link} from 'react-router-dom';
+import VideoPlayer from './video-player';
+import {Film} from '../mocks/films';
+import {useEffect, useState} from 'react';
 
 interface CardProps {
-  imagePath: string,
-  name: string,
-  id: number
+  film: Film
+  onMouseOver: (film: Film) => void;
 }
 
 
-function Card({imagePath, name, id}: CardProps) {
+function Card({film, onMouseOver}: CardProps) {
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+  const [isNeedVideoToPlay, setIsNeedVideoPlay] = useState(false);
+
+  useEffect(() => {
+    if (isNeedVideoToPlay) {
+      setTimeout(setIsVideoPlaying, 1000, true);
+    }
+  }
+  , [isNeedVideoToPlay]
+  );
+
+  const handleFilmCardMouseLeave = () => {
+    setIsNeedVideoPlay(false);
+    setIsVideoPlaying(false);
+  };
+
   return (
-    <article className="small-film-card catalog__films-card">
+    <article className="small-film-card catalog__films-card"
+      onMouseOver={(evt) => {
+        onMouseOver(film);
+        setIsNeedVideoPlay(true);
+      }}
+      onMouseLeave={handleFilmCardMouseLeave}
+    >
       <div className="small-film-card__image">
-        <img src={imagePath}
-          alt={name} width={280} height={175}
+        <VideoPlayer
+          film={film}
+          muted
+          width={280}
+          height={175}
+          isPlaying={isVideoPlaying}
         />
       </div>
       <h3 className="small-film-card__title">
-        <Link to={`/films/${id}`} className="small-film-card__link">{name}</Link>
+        <Link to={`/films/${film.id}`} className="small-film-card__link">{film.name}</Link>
       </h3>
     </article>
   );
