@@ -6,7 +6,7 @@ import {Link, useParams} from 'react-router-dom';
 import FilmsList from '../../components/films-list';
 import {Film} from '../../mocks/films';
 import {Review} from '../../mocks/reviews';
-import Tabs from "./tabs";
+import Tabs from './tabs';
 
 export enum ActivePart {
   OverviewPart = 1,
