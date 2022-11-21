@@ -2,9 +2,10 @@ import Logo from '../../components/logo';
 import Footer from '../../components/footer';
 import {Film} from '../../mocks/films';
 import {Genre} from '../../mocks/genres';
-import GenresItem from '../../components/genres-item';
 import UserBlock from '../../components/user-block';
 import FilmsList from '../../components/films-list';
+import GenresList from '../../components/genres-list';
+import {useAppSelector} from '../../hooks';
 
 export type MainProps = {
   films: Film[]
@@ -12,6 +13,7 @@ export type MainProps = {
 }
 
 function Main({films, genres}: MainProps) {
+  const { genre } = useAppSelector((state) => state);
   return (
     <>
       <section className='film-card'>
@@ -65,12 +67,9 @@ function Main({films, genres}: MainProps) {
         <section className='catalog'>
           <h2 className='catalog__title visually-hidden'>Catalog</h2>
 
-          <ul className='catalog__genres-list'>
-            <GenresItem name={'All genres'} isActive/>
-            {genres.map((genre) => <GenresItem key={genre.id} name={genre.name} isActive={false}/>)}
-          </ul>
+          <GenresList genres={genres} activeGenre={genre}/>
 
-          <FilmsList films={films}/>
+          <FilmsList films={useAppSelector((state)=>state.films)}/>
 
           <div className='catalog__more'>
             <button className='catalog__button' type='button'>Show more</button>
