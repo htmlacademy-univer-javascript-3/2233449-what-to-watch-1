@@ -2,8 +2,13 @@ import Review, {ReviewProps} from '../../components/review';
 import {Film} from '../../mocks/films';
 import {ActivePart} from './movie-page';
 
+interface TabsProps {
+  activePart:ActivePart,
+  film: Film,
+  reviews: ReviewProps[]
+}
 
-export default function renderActivePart(activePart: ActivePart, film: Film, reviews: ReviewProps[]) {
+function Tabs({activePart, film, reviews}: TabsProps) {
   switch (activePart) {
     case ActivePart.OverviewPart:
       return renderInfo(film);
@@ -90,3 +95,5 @@ function renderReviews(reviews: ReviewProps[]) {
     </div>
   );
 }
+
+export default Tabs;
