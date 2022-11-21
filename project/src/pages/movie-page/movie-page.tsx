@@ -1,5 +1,4 @@
 import Logo from '../../components/logo';
-import renderActivePart from './render-active-part';
 import Footer from '../../components/footer';
 import UserBlock from '../../components/user-block';
 import {useState} from 'react';
@@ -7,6 +6,7 @@ import {Link, useParams} from 'react-router-dom';
 import FilmsList from '../../components/films-list';
 import {Film} from '../../mocks/films';
 import {Review} from '../../mocks/reviews';
+import Tabs from './tabs';
 
 export enum ActivePart {
   OverviewPart = 1,
@@ -93,7 +93,7 @@ function MoviePage({films, reviews}: MoviePageProps) {
                   </li>
                 </ul>
               </nav>
-              {renderActivePart(activePagePart, films[id], reviews)}
+              <Tabs activePart={activePagePart} film={films[id]} reviews={reviews}/>
             </div>
           </div>
         </div>
