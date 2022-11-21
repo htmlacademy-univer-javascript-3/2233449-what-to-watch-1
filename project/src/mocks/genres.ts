@@ -5,6 +5,11 @@ export type Genre = {
 
 export const genres: Genre[] = [
   {
+    id: 0,
+    name: 'All genres',
+  },
+
+  {
     id: 1,
     name: 'Comedies',
   },
