@@ -1,10 +1,12 @@
-import { MouseEvent } from 'react';
+import {Dispatch, MouseEvent, SetStateAction} from 'react';
 import {changeGenre, getFilms} from '../store/action';
 import {useAppDispatch} from '../hooks';
+import {VISIBLE_FILMS_COUNT} from '../constants';
 
 type GenresProps = {
   name: string,
-  isActive: boolean
+  isActive: boolean,
+  setVisibleFilmsCount: Dispatch<SetStateAction<number>>
 }
 
 function GenresItem(props: GenresProps) {
@@ -13,6 +15,7 @@ function GenresItem(props: GenresProps) {
     e.preventDefault();
     dispatch(changeGenre({genre: props.name}));
     dispatch(getFilms());
+    props.setVisibleFilmsCount(VISIBLE_FILMS_COUNT);
   };
 
   return (
