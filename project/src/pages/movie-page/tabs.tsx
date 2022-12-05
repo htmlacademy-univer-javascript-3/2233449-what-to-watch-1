@@ -1,5 +1,5 @@
 import Review, {ReviewProps} from '../../components/review';
-import {Film} from '../../mocks/films';
+import {Film} from '../../types/film';
 import {ActivePart} from './movie-page';
 
 interface TabsProps {
@@ -20,14 +20,30 @@ function Tabs({activePart, film, reviews}: TabsProps) {
 
 }
 
+function getStringRating(rating:number) {
+  if (rating < 3) {
+    return 'Bad';
+  }
+  if (rating < 5) {
+    return 'Normal';
+  }
+  if (rating < 7) {
+    return 'Good';
+  }
+  if (rating < 9) {
+    return 'Very good';
+  }
+  return 'Awesome';
+}
+
 function renderInfo(film: Film) {
   return (
     <>
       <div className="film-rating">
         <div className="film-rating__score">{film?.rating}</div>
         <p className="film-rating__meta">
-          <span className="film-rating__level">{film?.ratingString}</span>
-          <span className="film-rating__count">{film?.ratingCount} ratings</span>
+          <span className="film-rating__level">{getStringRating(film?.rating)}</span>
+          <span className="film-rating__count">{film?.scoresCount} ratings</span>
         </p>
       </div>
 

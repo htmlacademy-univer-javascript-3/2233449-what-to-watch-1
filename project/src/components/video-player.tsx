@@ -1,4 +1,4 @@
-import {Film} from '../mocks/films';
+import {Film} from '../types/film';
 import {useEffect, useRef} from 'react';
 
 type PlayerProps = {
@@ -28,7 +28,7 @@ function VideoPlayer(props:PlayerProps) {
     <video
       ref={videoPlayerRef}
       src={props.film.videoLink}
-      poster={props.film.imagePath}
+      poster={props.film.posterImage}
       muted={props.muted}
       width={props.width}
       height={props.height}

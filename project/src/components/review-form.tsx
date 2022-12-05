@@ -11,7 +11,7 @@ function ReviewForm() {
           {
             Array.from(Array(10).keys()).reverse().map((j) => (
               <>
-                <input className="rating__input" id={`star-${j + 1}`} type="radio" name="rating" value={j + 1}
+                <input className="rating__input" id={`star-${j + 1}`} type="radio" name="rating" value={j + 1} checked={stars === j+1}
                   onChange={(() => setStars(j + 1))}
                 />
                 <label className="rating__label" htmlFor={`star-${j + 1}`}>Rating {j + 1}</label>

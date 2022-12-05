@@ -1,7 +1,5 @@
 import Logo from '../../components/logo';
 import Footer from '../../components/footer';
-import {Film} from '../../mocks/films';
-import {Genre} from '../../mocks/genres';
 import UserBlock from '../../components/user-block';
 import FilmsList from '../../components/films-list';
 import GenresList from '../../components/genres-list';
@@ -9,20 +7,18 @@ import {useAppSelector} from '../../hooks';
 import ShowMoreButton from '../../components/show-more-button';
 import {useState} from 'react';
 
-export type MainProps = {
-  films: Film[]
-  genres: Genre[],
-}
+function Main() {
+  const { currentGenre, films } = useAppSelector((state) => state);
+  const filteredFilms = currentGenre === 'All genres' ? films : films.filter((film) => film.genre === currentGenre);
+  const genres = [...new Set(films.map((film) => film.genre))];
+  genres.unshift('All genres');
 
-function Main({films, genres}: MainProps) {
-  const { genre } = useAppSelector((state) => state);
-  const filteredFilms = useAppSelector((state)=>state.films);
   const [visibleFilmsCount, setVisibleFilmsCount] = useState<number>(8);
   return (
     <>
       <section className='film-card'>
         <div className='film-card__bg'>
-          <img src={films[0].bgImagePath} alt={films[0].name}/>
+          <img src={films[0].backgroundImage} alt={films[0].name}/>
         </div>
 
         <h1 className='visually-hidden'>WTW</h1>
@@ -35,7 +31,7 @@ function Main({films, genres}: MainProps) {
         <div className='film-card__wrap'>
           <div className='film-card__info'>
             <div className='film-card__poster'>
-              <img src={films[0].imagePath} alt={films[0].imagePath}
+              <img src={films[0].posterImage} alt={films[0].posterImage}
                 width='218' height='327'
               />
             </div>
@@ -44,7 +40,7 @@ function Main({films, genres}: MainProps) {
               <h2 className='film-card__title'>{films[0].name}</h2>
               <p className='film-card__meta'>
                 <span className='film-card__genre'>{films[0].genre}</span>
-                <span className='film-card__year'>{films[0].date}</span>
+                <span className='film-card__year'>{films[0].released}</span>
               </p>
 
               <div className='film-card__buttons'>
@@ -71,7 +67,7 @@ function Main({films, genres}: MainProps) {
         <section className='catalog'>
           <h2 className='catalog__title visually-hidden'>Catalog</h2>
 
-          <GenresList genres={genres} activeGenre={genre} setVisibleFilmsCount={setVisibleFilmsCount}/>
+          <GenresList genres={genres} activeGenre={currentGenre} setVisibleFilmsCount={setVisibleFilmsCount}/>
 
           <FilmsList films={filteredFilms.slice(0, visibleFilmsCount)}/>
 
