@@ -6,6 +6,8 @@ import UserBlock from '../../components/user-block';
 import FilmsList from '../../components/films-list';
 import GenresList from '../../components/genres-list';
 import {useAppSelector} from '../../hooks';
+import ShowMoreButton from '../../components/show-more-button';
+import {useState} from 'react';
 
 export type MainProps = {
   films: Film[]
@@ -14,6 +16,8 @@ export type MainProps = {
 
 function Main({films, genres}: MainProps) {
   const { genre } = useAppSelector((state) => state);
+  const filteredFilms = useAppSelector((state)=>state.films);
+  const [visibleFilmsCount, setVisibleFilmsCount] = useState<number>(8);
   return (
     <>
       <section className='film-card'>
@@ -67,13 +71,11 @@ function Main({films, genres}: MainProps) {
         <section className='catalog'>
           <h2 className='catalog__title visually-hidden'>Catalog</h2>
 
-          <GenresList genres={genres} activeGenre={genre}/>
+          <GenresList genres={genres} activeGenre={genre} setVisibleFilmsCount={setVisibleFilmsCount}/>
 
-          <FilmsList films={useAppSelector((state)=>state.films)}/>
+          <FilmsList films={filteredFilms.slice(0, visibleFilmsCount)}/>
 
-          <div className='catalog__more'>
-            <button className='catalog__button' type='button'>Show more</button>
-          </div>
+          <ShowMoreButton isVisible={filteredFilms.length > visibleFilmsCount} setVisibleFilmsCount={setVisibleFilmsCount}/>
         </section>
         <Footer/>
       </div>
