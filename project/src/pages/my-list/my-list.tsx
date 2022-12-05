@@ -1,14 +1,16 @@
 import Logo from '../../components/logo';
 import Footer from '../../components/footer';
-import {Film} from '../../mocks/films';
 import UserBlock from '../../components/user-block';
 import FilmsList from '../../components/films-list';
+import {Film} from '../../types/film';
+import {useAppSelector} from '../../hooks';
 
 export type FilmsProps = {
   films: Film[]
 }
 
-function MyList(props: FilmsProps) {
+function MyList() {
+  const films = useAppSelector((state) => state.films);
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
@@ -19,7 +21,7 @@ function MyList(props: FilmsProps) {
 
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
-        <FilmsList films={props.films}/>
+        <FilmsList films={films}/>
       </section>
       <Footer/>
     </div>

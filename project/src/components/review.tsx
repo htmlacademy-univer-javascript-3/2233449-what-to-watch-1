@@ -7,7 +7,7 @@ export type ReviewProps = {
   rating: string
 }
 
-function Review({text, author, date, dateText, rating}: ReviewProps) {
+function Review({id, text, author, date, dateText, rating}: ReviewProps) {
   return (
     <div className="review">
       <blockquote className="review__quote">

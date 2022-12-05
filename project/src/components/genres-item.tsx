@@ -1,5 +1,5 @@
 import {Dispatch, MouseEvent, SetStateAction} from 'react';
-import {changeGenre, getFilms} from '../store/action';
+import {changeGenre} from '../store/action';
 import {useAppDispatch} from '../hooks';
 import {VISIBLE_FILMS_COUNT} from '../constants';
 
@@ -13,14 +13,13 @@ function GenresItem(props: GenresProps) {
   const dispatch = useAppDispatch();
   const handleLinkClick = (e: MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    dispatch(changeGenre({genre: props.name}));
-    dispatch(getFilms());
+    dispatch(changeGenre({currentGenre: props.name}));
     props.setVisibleFilmsCount(VISIBLE_FILMS_COUNT);
   };
 
   return (
     <li className={props.isActive ? 'catalog__genres-item catalog__genres-item--active' : 'catalog__genres-item'}>
-      <a href='#' className='catalog__genres-link' onClick={handleLinkClick}>{props.name}</a>
+      <a href='#todo' className='catalog__genres-link' onClick={handleLinkClick}>{props.name}</a>
     </li>
   );
 }

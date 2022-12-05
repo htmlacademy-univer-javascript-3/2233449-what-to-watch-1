@@ -1,6 +1,6 @@
 import {Link} from 'react-router-dom';
 import VideoPlayer from './video-player';
-import {Film} from '../mocks/films';
+import {Film} from '../types/film';
 import {useEffect, useState} from 'react';
 
 interface CardProps {
@@ -14,9 +14,13 @@ function Card({film, onMouseOver}: CardProps) {
   const [isNeedVideoToPlay, setIsNeedVideoPlay] = useState(false);
 
   useEffect(() => {
+    let needUpdate = true;
     if (isNeedVideoToPlay) {
-      setTimeout(setIsVideoPlaying, 1000, true);
+      setTimeout(() => needUpdate && setIsVideoPlaying(true), 1000);
     }
+    return() => {
+      needUpdate = false;
+    };
   }
   , [isNeedVideoToPlay]
   );
