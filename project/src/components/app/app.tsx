@@ -24,7 +24,7 @@ function App(): JSX.Element {
       <Routes>
         <Route path="/" element={<Main/>}/>
         <Route path="/login" element={<SignIn/>}/>
-        <Route path="/mylist" element={<PrivateRoute isLogIn destinationPage={<MyList/>}/>}/>
+        <Route path="/mylist" element={<PrivateRoute destinationPage={<MyList/>}/>}/>
         <Route path="/films/:id" element={<MoviePage/>}/>
         <Route path="/films/:id/review" element={<AddReview/>}/>
         <Route path="/player/:id" element={<Player/>}/>

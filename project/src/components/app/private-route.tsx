@@ -1,19 +1,21 @@
 import {Navigate} from 'react-router-dom';
+import {useAppSelector} from '../../hooks';
+import {LOGIN_ROUT} from '../../constants';
 
 type PrivateRouterProps = {
-  isLogIn: boolean;
   destinationPage: JSX.Element;
 };
 
-function PrivateRoute({isLogIn, destinationPage}: PrivateRouterProps) {
+function PrivateRoute({destinationPage}: PrivateRouterProps) {
+  const {authorizationStatus} = useAppSelector((state) => state);
   return (
     <div>
       {
         (() => {
-          if (isLogIn) {
+          if (authorizationStatus) {
             return destinationPage;
           } else {
-            return <Navigate to={'/login'}/>;
+            return <Navigate to={LOGIN_ROUT}/>;
           }
         }
         )()

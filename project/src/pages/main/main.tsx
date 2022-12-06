@@ -8,7 +8,7 @@ import ShowMoreButton from '../../components/show-more-button';
 import {useState} from 'react';
 
 function Main() {
-  const { currentGenre, films } = useAppSelector((state) => state);
+  const { currentGenre, films} = useAppSelector((state) => state);
   const filteredFilms = currentGenre === 'All genres' ? films : films.filter((film) => film.genre === currentGenre);
   const genres = [...new Set(films.map((film) => film.genre))];
   genres.unshift('All genres');
