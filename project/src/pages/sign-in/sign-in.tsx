@@ -3,7 +3,7 @@ import {renderSignInError} from './sign-in-error';
 import {renderSignInMessage} from './sign-in-message';
 import Footer from '../../components/footer';
 import {useAppDispatch, useAppSelector} from '../../hooks';
-import {MAIN_ROUTE} from '../../constants';
+import {AuthorizationStatus, MAIN_ROUTE} from '../../constants';
 import {loginAction} from '../../api-action';
 import {ChangeEvent, FormEvent, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
@@ -15,7 +15,7 @@ function SignIn() {
   const [password, setPassword] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const isSignInMessage = false;
-  const {isError} = useAppSelector((state) => state);
+  const {isError, authorizationStatus} = useAppSelector((state) => state);
 
   const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
@@ -26,8 +26,11 @@ function SignIn() {
   };
 
   const onSubmit = (authData: AuthData) => {
-    dispatch(loginAction(authData));
-    navigate(MAIN_ROUTE);
+    dispatch(loginAction(authData)).then(() => {
+      if (authorizationStatus === AuthorizationStatus.Auth) {
+        navigate(MAIN_ROUTE);
+      }
+    });
   };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {

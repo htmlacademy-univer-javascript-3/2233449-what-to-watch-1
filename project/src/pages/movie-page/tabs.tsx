@@ -1,26 +1,24 @@
-import Review, {ReviewProps} from '../../components/review';
-import {Film} from '../../types/film';
 import {ActivePart} from './movie-page';
+import {useAppSelector} from '../../hooks';
+import ReviewCard from '../../components/review-card';
 
 interface TabsProps {
-  activePart:ActivePart,
-  film: Film,
-  reviews: ReviewProps[]
+  activePart: ActivePart
 }
 
-function Tabs({activePart, film, reviews}: TabsProps) {
+function Tabs({activePart}: TabsProps) {
   switch (activePart) {
     case ActivePart.OverviewPart:
-      return renderInfo(film);
+      return <FilmInfo/>;
     case ActivePart.ReviewPart:
-      return renderReviews(reviews);
+      return <FilmReviews/>;
     case ActivePart.DetailsPart:
-      return renderDetails(film);
+      return <FilmDetails/>;
   }
 
 }
 
-function getStringRating(rating:number) {
+function getStringRating(rating: number) {
   if (rating < 3) {
     return 'Bad';
   }
@@ -36,25 +34,27 @@ function getStringRating(rating:number) {
   return 'Awesome';
 }
 
-function renderInfo(film: Film) {
+function FilmInfo() {
+  const {currentFilm} = useAppSelector((state) => state);
   return (
     <>
       <div className="film-rating">
-        <div className="film-rating__score">{film?.rating}</div>
+        <div className="film-rating__score">{currentFilm?.rating}</div>
         <p className="film-rating__meta">
-          <span className="film-rating__level">{getStringRating(film?.rating)}</span>
-          <span className="film-rating__count">{film?.scoresCount} ratings</span>
+          {currentFilm?.rating ?
+            <span className="film-rating__level">{getStringRating(currentFilm?.rating)}</span> : null}
+
+          <span className="film-rating__count">{currentFilm?.scoresCount} ratings</span>
         </p>
       </div>
 
       <div className="film-card__text">
-        <p>{film?.description}</p>
+        <p>{currentFilm?.description}</p>
 
-        <p className="film-card__director"><strong>Director: {film?.director}</strong></p>
+        <p className="film-card__director"><strong>Director: {currentFilm?.director}</strong></p>
 
         <p className="film-card__starring">
-          <strong>Starring: {film?.starring}
-            and other
+          <strong>Starring: {currentFilm?.starring.join(', ').concat(' and other')}
           </strong>
         </p>
       </div>
@@ -62,17 +62,18 @@ function renderInfo(film: Film) {
   );
 }
 
-function renderDetails(film: Film) {
+function FilmDetails() {
+  const {currentFilm} = useAppSelector((state) => state);
   return (
     <div className="film-card__text film-card__row">
       <div className="film-card__text-col">
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Director</strong>
-          <span className="film-card__details-value">{film?.director}</span>
+          <span className="film-card__details-value">{currentFilm?.director}</span>
         </p>
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Starring</strong>
-          <span className="film-card__details-value"> {film?.starring.join('\r')}
+          <span className="film-card__details-value"> {currentFilm?.starring.join('\r')}
           </span>
         </p>
       </div>
@@ -80,29 +81,31 @@ function renderDetails(film: Film) {
       <div className="film-card__text-col">
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Run Time</strong>
-          <span className="film-card__details-value">{film?.runTime}</span>
+          <span className="film-card__details-value">{currentFilm?.runTime}</span>
         </p>
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Genre</strong>
-          <span className="film-card__details-value">{film?.genre}</span>
+          <span className="film-card__details-value">{currentFilm?.genre}</span>
         </p>
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Released</strong>
-          <span className="film-card__details-value">{film?.genre}</span>
+          <span className="film-card__details-value">{currentFilm?.genre}</span>
         </p>
       </div>
     </div>
   );
 }
 
-function renderReviews(reviews: ReviewProps[]) {
+function FilmReviews() {
+  const {reviews} = useAppSelector((state) => state);
+
   return (
     <div className="film-card__reviews film-card__row">
       <div className="film-card__reviews-col">
         {reviews.map((review) =>
           (
-            <Review key={review.id} text={review?.text} author={review?.author} date={review?.date}
-              dateText={review?.dateText} rating={review?.rating}
+            <ReviewCard key={review.id} comment={review?.comment} user={review?.user} date={review?.date}
+              rating={review?.rating}
               id={review.id}
             />
           )

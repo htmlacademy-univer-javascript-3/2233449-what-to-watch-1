@@ -6,9 +6,11 @@ import GenresList from '../../components/genres-list';
 import {useAppSelector} from '../../hooks';
 import ShowMoreButton from '../../components/show-more-button';
 import {useState} from 'react';
+import {PlayButton} from '../../components/play-button';
+import {MyListButton} from '../../components/my-list-button';
 
 function Main() {
-  const { currentGenre, films} = useAppSelector((state) => state);
+  const {currentGenre, films} = useAppSelector((state) => state);
   const filteredFilms = currentGenre === 'All genres' ? films : films.filter((film) => film.genre === currentGenre);
   const genres = [...new Set(films.map((film) => film.genre))];
   genres.unshift('All genres');
@@ -44,19 +46,8 @@ function Main() {
               </p>
 
               <div className='film-card__buttons'>
-                <button className='btn btn--play film-card__button' type='button'>
-                  <svg viewBox='0 0 19 19' width='19' height='19'>
-                    <use xlinkHref='#play-s'/>
-                  </svg>
-                  <span>Play</span>
-                </button>
-                <button className='btn btn--list film-card__button' type='button'>
-                  <svg viewBox='0 0 19 20' width='19' height='20'>
-                    <use xlinkHref='#add'/>
-                  </svg>
-                  <span>My list</span>
-                  <span className='film-card__count'>{films.length}</span>
-                </button>
+                <PlayButton filmId={films[0].id + 1}/>
+                <MyListButton length={films.length}/>
               </div>
             </div>
           </div>
@@ -71,7 +62,9 @@ function Main() {
 
           <FilmsList films={filteredFilms.slice(0, visibleFilmsCount)}/>
 
-          <ShowMoreButton isVisible={filteredFilms.length > visibleFilmsCount} setVisibleFilmsCount={setVisibleFilmsCount}/>
+          <ShowMoreButton isVisible={filteredFilms.length > visibleFilmsCount}
+            setVisibleFilmsCount={setVisibleFilmsCount}
+          />
         </section>
         <Footer/>
       </div>

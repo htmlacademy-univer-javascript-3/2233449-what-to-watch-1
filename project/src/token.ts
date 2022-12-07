@@ -4,8 +4,8 @@ export function saveToken(token:string) {
   localStorage.setItem(TOKEN_NAME, token);
 }
 
-export function getToken() {
-  localStorage.getItem(TOKEN_NAME);
+export function getToken() :string|null {
+  return localStorage.getItem(TOKEN_NAME);
 }
 
 export function clearToken() {
