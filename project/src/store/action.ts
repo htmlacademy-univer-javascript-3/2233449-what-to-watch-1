@@ -9,7 +9,6 @@ export const getFilms = createAction<Film[]>('films/getFilms');
 export const setDataLoadingStatus = createAction<boolean>('data/dataLoadingStatus');
 export const setAuthorizationStatus = createAction<AuthorizationStatus>('data/authorizationStatus');
 export const setUser = createAction<UserData|null>('data/userData');
-export const setIsError = createAction<boolean>('data/isError');
 export const setCurrentFilm = createAction<Film>('films/getFilm');
 export const setCurrentFilmReviews = createAction<Review[]>('film/getReview');
 export const setCurrentFilmSimilar = createAction<Film[]>('film/getSimilar');

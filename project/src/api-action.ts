@@ -8,7 +8,6 @@ import {
   setCurrentFilmReviews,
   setCurrentFilmSimilar,
   setDataLoadingStatus,
-  setIsError,
   setUser
 } from './store/action';
 import {AppDispatch, State} from './types/store';
@@ -43,12 +42,10 @@ export const checkLoginAction = createAsyncThunk<void, undefined, {
     await api.get<UserData>(LOGIN_ROUT).then(
       () => {
         dispatch(setAuthorizationStatus(AuthorizationStatus.Auth));
-        dispatch(setIsError(false));
       }
     ).catch(
       (err) => {
         if (err.response) {
-          dispatch(setIsError(true));
           dispatch(setAuthorizationStatus(AuthorizationStatus.NoAuth));
         }
       }
@@ -88,7 +85,6 @@ export const loginAction = createAsyncThunk<void, AuthData, {
     ).catch(
       (err) => {
         if (err.response) {
-          dispatch(setIsError(true));
           dispatch(setAuthorizationStatus(AuthorizationStatus.NoAuth));
           return err;
         }

@@ -14,8 +14,9 @@ function SignIn() {
   const navigate = useNavigate();
   const [password, setPassword] = useState<string>('');
   const [email, setEmail] = useState<string>('');
+  const [isError, setIsError] = useState<boolean>(false);
   const isSignInMessage = false;
-  const {isError, authorizationStatus} = useAppSelector((state) => state);
+  const {authorizationStatus} = useAppSelector((state) => state);
 
   const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
@@ -29,6 +30,8 @@ function SignIn() {
     dispatch(loginAction(authData)).then(() => {
       if (authorizationStatus === AuthorizationStatus.Auth) {
         navigate(MAIN_ROUTE);
+      } else {
+        setIsError(true);
       }
     });
   };

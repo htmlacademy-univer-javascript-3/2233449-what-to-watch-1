@@ -22,7 +22,6 @@ export type AppState = {
   isDataLoaded: boolean,
   authorizationStatus: AuthorizationStatus,
   user: UserData|null,
-  isError: boolean,
 }
 
 export const initialState:AppState = {
@@ -34,7 +33,6 @@ export const initialState:AppState = {
   isDataLoaded: false,
   authorizationStatus: AuthorizationStatus.Unknown,
   user: null,
-  isError: false,
 };
 
 export const Reducer = createReducer(initialState, (builder) => {
