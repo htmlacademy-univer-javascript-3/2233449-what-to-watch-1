@@ -1,18 +1,16 @@
 import Logo from '../../components/logo';
 import UserBlock from '../../components/user-block';
 import ReviewForm from '../../components/review-form';
-import {useParams} from 'react-router-dom';
 import {useAppSelector} from '../../hooks';
 
 function AddReview() {
-  const params = useParams();
-  const id = Number(params.id) - 1;
-  const film = useAppSelector((state) => state.films.find((f: { id: number; }) => f.id === id));
+  const {currentFilm} = useAppSelector((state) => state);
+
   return (
     <section className="film-card film-card--full">
       <div className="film-card__header">
         <div className="film-card__bg">
-          <img src={film?.backgroundImage} alt={film?.name}/>
+          <img src={currentFilm?.backgroundImage} alt={currentFilm?.name}/>
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -22,7 +20,7 @@ function AddReview() {
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <a href="film-page.html" className="breadcrumbs__link">{film?.name}</a>
+                <a href="film-page.html" className="breadcrumbs__link">{currentFilm?.name}</a>
               </li>
               <li className="breadcrumbs__item">
                 <a href="#todo" className="breadcrumbs__link">Add review</a>
@@ -33,7 +31,7 @@ function AddReview() {
         </header>
 
         <div className="film-card__poster film-card__poster--small">
-          <img src={film?.posterImage} alt={film?.name} width="218"
+          <img src={currentFilm?.posterImage} alt={currentFilm?.name} width="218"
             height="327"
           />
         </div>

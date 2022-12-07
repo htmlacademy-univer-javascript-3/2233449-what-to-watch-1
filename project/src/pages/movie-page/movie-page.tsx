@@ -1,13 +1,16 @@
 import Logo from '../../components/logo';
 import Footer from '../../components/footer';
 import UserBlock from '../../components/user-block';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {Link, useParams} from 'react-router-dom';
 import FilmsList from '../../components/films-list';
 import Tabs from './tabs';
-import {useAppSelector} from '../../hooks';
-import {Review} from '../../types/review';
+import {useAppDispatch, useAppSelector} from '../../hooks';
 import NotFound from '../page-not-found/page-not-found';
+import {getFilmCommentAction, getFilmInfoAction, getFilmSimilarAction} from '../../api-action';
+import {PlayButton} from '../../components/play-button';
+import {MyListButton} from '../../components/my-list-button';
+import {AuthorizationStatus} from '../../constants';
 
 export enum ActivePart {
   OverviewPart = 1,
@@ -17,12 +20,19 @@ export enum ActivePart {
 
 function MoviePage() {
   const params = useParams();
-  const reviews: Review[] = []; //todo:сделать нормально
+  const dispatch = useAppDispatch();
   const id = Number(params.id);
   const [activePagePart, setActivePagePart] = useState(ActivePart.OverviewPart);
-  const film = useAppSelector((state) => state.films.find((f: { id: number; }) => f.id === id));
-  const films = useAppSelector((state) => state.films);
-  if (!film) {
+  const {films, currentFilm, similarFilms, authorizationStatus} = useAppSelector((state) => state);
+
+  useEffect(() => {
+    if (!currentFilm || currentFilm.id !== id) {
+      dispatch(getFilmInfoAction(id));
+      dispatch(getFilmSimilarAction(id));
+      dispatch(getFilmCommentAction(id));
+    }
+  }, [currentFilm, dispatch, id]); //todo разобраться с deps
+  if (!currentFilm) {
     return <NotFound/>;
   } else {
     return (
@@ -30,7 +40,7 @@ function MoviePage() {
         <section className="film-card film-card--full">
           <div className="film-card__hero">
             <div className="film-card__bg">
-              <img src={film?.backgroundImage} alt={film?.name}/>
+              <img src={currentFilm?.backgroundImage} alt={currentFilm?.name}/>
             </div>
 
             <h1 className="visually-hidden">WTW</h1>
@@ -42,27 +52,20 @@ function MoviePage() {
 
             <div className="film-card__wrap">
               <div className="film-card__desc">
-                <h2 className="film-card__title">{film?.name}</h2>
+                <h2 className="film-card__title">{currentFilm?.name}</h2>
                 <p className="film-card__meta">
-                  <span className="film-card__genre">{film?.genre}</span>
-                  <span className="film-card__year">{film?.released}</span>
+                  <span className="film-card__genre">{currentFilm?.genre}</span>
+                  <span className="film-card__year">{currentFilm?.released}</span>
                 </p>
 
                 <div className="film-card__buttons">
-                  <Link className="btn btn--play film-card__button" to={`player/${film.id}`}>
-                    <svg viewBox="0 0 19 19" width="19" height="19">
-                      <use xlinkHref="#play-s"/>
-                    </svg>
-                    <span>Play</span>
-                  </Link>
-                  <button className="btn btn--list film-card__button" type="button">
-                    <svg viewBox="0 0 19 20" width="19" height="20">
-                      <use xlinkHref="#add"/>
-                    </svg>
-                    <span>My list</span>
-                    <span className="film-card__count">{films.length}</span>
-                  </button>
-                  <Link to={`/films/${id + 1}/review`} className="btn film-card__button">Add review</Link>
+                  <PlayButton filmId={currentFilm.id + 1}/>
+                  <MyListButton length={films.length}/>
+                  {
+                    authorizationStatus === AuthorizationStatus.Auth ?
+                      <Link to={`/films/${id + 1}/review`} className="btn film-card__button">Add review</Link>
+                      : null
+                  }
                 </div>
               </div>
             </div>
@@ -71,7 +74,7 @@ function MoviePage() {
           <div className="film-card__wrap film-card__translate-top">
             <div className="film-card__info">
               <div className="film-card__poster film-card__poster--big">
-                <img src={film?.posterImage} alt={`${film?.name} poster`}
+                <img src={currentFilm?.posterImage} alt={`${currentFilm?.name} poster`}
                   width="218" height="327"
                 />
               </div>
@@ -81,21 +84,30 @@ function MoviePage() {
                     <li
                       className={activePagePart === ActivePart.OverviewPart ? 'film-nav__item film-nav__item--active' : 'film-nav__item'}
                     >
-                      <Link to="#" className="film-nav__link" onClick={() => setActivePagePart(ActivePart.OverviewPart)}>Overview</Link>
+                      <Link to="#" className="film-nav__link"
+                        onClick={() => setActivePagePart(ActivePart.OverviewPart)}
+                      >Overview
+                      </Link>
                     </li>
                     <li
                       className={activePagePart === ActivePart.DetailsPart ? 'film-nav__item film-nav__item--active' : 'film-nav__item'}
                     >
-                      <Link to="#" className="film-nav__link" onClick={() => setActivePagePart(ActivePart.DetailsPart)}>Details</Link>
+                      <Link to="#" className="film-nav__link"
+                        onClick={() => setActivePagePart(ActivePart.DetailsPart)}
+                      >Details
+                      </Link>
                     </li>
                     <li
                       className={activePagePart === ActivePart.ReviewPart ? 'film-nav__item film-nav__item--active' : 'film-nav__item'}
                     >
-                      <Link to="#" className="film-nav__link" onClick={() => setActivePagePart(ActivePart.ReviewPart)}>Reviews</Link>
+                      <Link to="#" className="film-nav__link"
+                        onClick={() => setActivePagePart(ActivePart.ReviewPart)}
+                      >Reviews
+                      </Link>
                     </li>
                   </ul>
                 </nav>
-                <Tabs activePart={activePagePart} film={film} reviews={reviews}/>
+                <Tabs activePart={activePagePart}/>
               </div>
             </div>
           </div>
@@ -104,8 +116,7 @@ function MoviePage() {
         <div className="page-content">
           <section className="catalog catalog--like-this">
             <h2 className="catalog__title">More like this</h2>
-
-            {<FilmsList films={films}/>}
+            {<FilmsList films={similarFilms.slice(0, 4)}/>}
           </section>
           <Footer/>
         </div>
