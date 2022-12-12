@@ -1,10 +1,9 @@
 import {configureStore} from '@reduxjs/toolkit';
-import Reducer, {initialState} from './reducer';
 import {createAPI} from '../api';
+import {rootReducer} from './root-reducer';
 
 const api = createAPI();
 export const store = configureStore({
-  preloadedState: initialState,
-  reducer: Reducer,
+  reducer: rootReducer,
   middleware: ((getDefaultMiddleware) => getDefaultMiddleware({thunk: {extraArgument: api}}))
 });

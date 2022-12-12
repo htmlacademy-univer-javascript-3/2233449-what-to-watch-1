@@ -8,9 +8,12 @@ import ShowMoreButton from '../../components/show-more-button';
 import {useState} from 'react';
 import {PlayButton} from '../../components/play-button';
 import {MyListButton} from '../../components/my-list-button';
+import {getFilms} from '../../store/data-reducer/selector';
+import {getCurrentGenre} from '../../store/genre-reducer/selector';
 
 function Main() {
-  const {currentGenre, films} = useAppSelector((state) => state);
+  const currentGenre = useAppSelector(getCurrentGenre);
+  const films = useAppSelector(getFilms);
   const filteredFilms = currentGenre === 'All genres' ? films : films.filter((film) => film.genre === currentGenre);
   const genres = [...new Set(films.map((film) => film.genre))];
   genres.unshift('All genres');
@@ -22,8 +25,6 @@ function Main() {
         <div className='film-card__bg'>
           <img src={films[0].backgroundImage} alt={films[0].name}/>
         </div>
-
-        <h1 className='visually-hidden'>WTW</h1>
 
         <header className='page-header film-card__head'>
           <Logo className="logo__link"/>

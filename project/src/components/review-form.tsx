@@ -3,11 +3,12 @@ import {useAppDispatch, useAppSelector} from '../hooks';
 import {useNavigate} from 'react-router-dom';
 import {postCommentAction} from '../api-action';
 import {FILM_ROUTE} from '../constants';
+import {getCurrentFilm} from '../store/film-reducer/selector';
 
 function ReviewForm() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const {currentFilm} = useAppSelector((state) => state);
+  const currentFilm = useAppSelector(getCurrentFilm);
   const [stars, setStars] = useState(0);
   const [text, setText] = useState('');
 

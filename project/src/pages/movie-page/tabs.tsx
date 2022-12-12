@@ -1,6 +1,7 @@
 import {ActivePart} from './movie-page';
 import {useAppSelector} from '../../hooks';
 import ReviewCard from '../../components/review-card';
+import {getCurrentFilm, getReviews} from '../../store/film-reducer/selector';
 
 interface TabsProps {
   activePart: ActivePart
@@ -35,7 +36,7 @@ function getStringRating(rating: number) {
 }
 
 function FilmInfo() {
-  const {currentFilm} = useAppSelector((state) => state);
+  const currentFilm = useAppSelector(getCurrentFilm);
   return (
     <>
       <div className="film-rating">
@@ -63,7 +64,7 @@ function FilmInfo() {
 }
 
 function FilmDetails() {
-  const {currentFilm} = useAppSelector((state) => state);
+  const currentFilm = useAppSelector(getCurrentFilm);
   return (
     <div className="film-card__text film-card__row">
       <div className="film-card__text-col">
@@ -97,7 +98,7 @@ function FilmDetails() {
 }
 
 function FilmReviews() {
-  const {reviews} = useAppSelector((state) => state);
+  const reviews = useAppSelector(getReviews);
 
   return (
     <div className="film-card__reviews film-card__row">

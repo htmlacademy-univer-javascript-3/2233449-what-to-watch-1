@@ -1,13 +1,11 @@
 import {RenderPauseButton} from '../../components/play-pause-button/pause_button';
 import {RenderPlayButton} from '../../components/play-pause-button/play_button';
 import {useState} from 'react';
-import {useParams} from 'react-router-dom';
 import {useAppSelector} from '../../hooks';
+import {getCurrentFilm} from '../../store/film-reducer/selector';
 
 function Player() {
-  const params = useParams();
-  const id = Number(params.id) - 1;
-  const film = useAppSelector((state) => state.films.find((f: { id: number; }) => f.id === id));
+  const film = useAppSelector(getCurrentFilm);
   const [isPlay] = useState(true);
   return (
     <div className="player">

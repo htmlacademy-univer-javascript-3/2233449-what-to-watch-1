@@ -7,10 +7,13 @@ import FilmsList from '../../components/films-list';
 import Tabs from './tabs';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import NotFound from '../page-not-found/page-not-found';
-import {getFilmCommentAction, getFilmInfoAction, getFilmSimilarAction} from '../../api-action';
 import {PlayButton} from '../../components/play-button';
 import {MyListButton} from '../../components/my-list-button';
 import {AuthorizationStatus} from '../../constants';
+import {getCurrentFilm, getSimilarFilms} from '../../store/film-reducer/selector';
+import {getAuthorizationStatus} from '../../store/user-reducer/selector';
+import {getFilms} from '../../store/data-reducer/selector';
+import {getFilmCommentAction, getFilmInfoAction, getFilmSimilarAction} from '../../api-action';
 
 export enum ActivePart {
   OverviewPart = 1,
@@ -23,7 +26,10 @@ function MoviePage() {
   const dispatch = useAppDispatch();
   const id = Number(params.id);
   const [activePagePart, setActivePagePart] = useState(ActivePart.OverviewPart);
-  const {films, currentFilm, similarFilms, authorizationStatus} = useAppSelector((state) => state);
+  const films = useAppSelector(getFilms);
+  const currentFilm = useAppSelector(getCurrentFilm);
+  const similarFilms = useAppSelector(getSimilarFilms);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   useEffect(() => {
     if (!currentFilm || currentFilm.id !== id) {
