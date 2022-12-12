@@ -10,6 +10,10 @@ import {useNavigate} from 'react-router-dom';
 import {AuthData} from '../../types/auth-data';
 import {getAuthorizationStatus} from '../../store/user-reducer/selector';
 
+function checkPassword(password: string) {
+  return (/[a-z]/.test(password)) && (/[0-9]/.test(password));
+}
+
 function SignIn() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -40,12 +44,12 @@ function SignIn() {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (email !== '' && password !== '') {
+    if (email !== '' && password !== '' && checkPassword(password)) {
       onSubmit({
         email,
         password,
       });
-    }
+    } else {setIsError(true);}
   };
 
   return (

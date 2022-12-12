@@ -26,8 +26,6 @@ function Main() {
           <img src={films[0].backgroundImage} alt={films[0].name}/>
         </div>
 
-        <h1 className='visually-hidden'>WTW</h1>
-
         <header className='page-header film-card__head'>
           <Logo className="logo__link"/>
           <UserBlock/>
