@@ -2,9 +2,10 @@ import Logo from '../../components/logo';
 import UserBlock from '../../components/user-block';
 import ReviewForm from '../../components/review-form';
 import {useAppSelector} from '../../hooks';
+import {getCurrentFilm} from '../../store/film-reducer/selector';
 
 function AddReview() {
-  const {currentFilm} = useAppSelector((state) => state);
+  const currentFilm = useAppSelector(getCurrentFilm);
 
   return (
     <section className="film-card film-card--full">

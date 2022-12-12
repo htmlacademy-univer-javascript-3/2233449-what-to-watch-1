@@ -4,13 +4,14 @@ import UserBlock from '../../components/user-block';
 import FilmsList from '../../components/films-list';
 import {Film} from '../../types/film';
 import {useAppSelector} from '../../hooks';
+import {getFilms} from '../../store/data-reducer/selector';
 
 export type FilmsProps = {
   films: Film[]
 }
 
 function MyList() {
-  const films = useAppSelector((state) => state.films);
+  const films = useAppSelector(getFilms);
   return (
     <div className="user-page">
       <header className="page-header user-page__head">

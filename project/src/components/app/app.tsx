@@ -10,9 +10,10 @@ import PrivateRoute from './private-route';
 import Main from '../../pages/main/main';
 import Spinner from '../../pages/loading-page/loading-page';
 import {useAppSelector} from '../../hooks';
+import {getIsDataLoaded} from '../../store/data-reducer/selector';
 
 function App(): JSX.Element {
-  const {isDataLoaded} = useAppSelector((state) => state);
+  const isDataLoaded = useAppSelector(getIsDataLoaded);
 
   if (!isDataLoaded) {
     return (

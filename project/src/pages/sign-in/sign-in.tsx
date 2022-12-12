@@ -8,6 +8,7 @@ import {loginAction} from '../../api-action';
 import {ChangeEvent, FormEvent, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {AuthData} from '../../types/auth-data';
+import {getAuthorizationStatus} from '../../store/user-reducer/selector';
 
 function SignIn() {
   const dispatch = useAppDispatch();
@@ -16,7 +17,7 @@ function SignIn() {
   const [email, setEmail] = useState<string>('');
   const [isError, setIsError] = useState<boolean>(false);
   const isSignInMessage = false;
-  const {authorizationStatus} = useAppSelector((state) => state);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);

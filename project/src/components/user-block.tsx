@@ -2,10 +2,12 @@ import {useAppDispatch, useAppSelector} from '../hooks';
 import {logoutAction} from '../api-action';
 import {AuthorizationStatus, LOGIN_ROUT} from '../constants';
 import {Link} from 'react-router-dom';
+import {getAuthorizationStatus, getUser} from '../store/user-reducer/selector';
 
 function UserBlock() {
   const dispatch = useAppDispatch();
-  const {authorizationStatus, user} = useAppSelector((state) => state);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const user = useAppSelector(getUser);
   return (
     <ul className="user-block">
       {authorizationStatus === AuthorizationStatus.Auth ?
