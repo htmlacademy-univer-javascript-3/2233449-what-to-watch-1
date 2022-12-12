@@ -2,13 +2,12 @@ import Logo from '../../components/logo';
 import {renderSignInError} from './sign-in-error';
 import {renderSignInMessage} from './sign-in-message';
 import Footer from '../../components/footer';
-import {useAppDispatch, useAppSelector} from '../../hooks';
-import {AuthorizationStatus, MAIN_ROUTE} from '../../constants';
+import {useAppDispatch} from '../../hooks';
+import {MAIN_ROUTE} from '../../constants';
 import {loginAction} from '../../api-action';
 import {ChangeEvent, FormEvent, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {AuthData} from '../../types/auth-data';
-import {getAuthorizationStatus} from '../../store/user-reducer/selector';
 
 function checkPassword(password: string) {
   return (/[a-z]/.test(password)) && (/[0-9]/.test(password));
@@ -21,7 +20,6 @@ function SignIn() {
   const [email, setEmail] = useState<string>('');
   const [isError, setIsError] = useState<boolean>(false);
   const isSignInMessage = false;
-  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
@@ -33,11 +31,9 @@ function SignIn() {
 
   const onSubmit = (authData: AuthData) => {
     dispatch(loginAction(authData)).then(() => {
-      if (authorizationStatus === AuthorizationStatus.Auth) {
-        navigate(MAIN_ROUTE);
-      } else {
-        setIsError(true);
-      }
+      navigate(MAIN_ROUTE);
+    }).catch(() => {
+      setIsError(true);
     });
   };
 
