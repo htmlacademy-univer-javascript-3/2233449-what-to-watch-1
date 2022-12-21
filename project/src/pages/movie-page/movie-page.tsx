@@ -65,7 +65,7 @@ function MoviePage() {
                 </p>
 
                 <div className="film-card__buttons">
-                  <PlayButton filmId={currentFilm.id + 1}/>
+                  <PlayButton filmId={currentFilm.id}/>
                   <MyListButton length={films.length}/>
                   {
                     authorizationStatus === AuthorizationStatus.Auth ?
