@@ -10,7 +10,7 @@ type DataReducer = {
 
 export const initialState: DataReducer = {
   films: [],
-  isDataLoaded: false
+  isDataLoaded: false,
 };
 
 export const dataReducer = createSlice({
@@ -19,7 +19,7 @@ export const dataReducer = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder
-      .addCase(getFilmsAction.pending, (state, action) => {
+      .addCase(getFilmsAction.pending, (state) => {
         state.isDataLoaded = false;
       })
       .addCase(getFilmsAction.fulfilled, (state, action) => {

@@ -2,18 +2,28 @@ import {createSlice} from '@reduxjs/toolkit';
 import {Film} from '../../types/film';
 import {NameSpace} from '../../constants';
 import {Review} from '../../types/review';
-import {getFilmCommentAction, getFilmInfoAction, getFilmSimilarAction} from '../../api-action';
+import {
+  getFavoriteFilmsAction,
+  getFilmCommentAction,
+  getFilmInfoAction,
+  getFilmSimilarAction, getPromoFilmAction,
+  setFavoriteFilmAction
+} from '../../api-action';
 
 export type AppState = {
   reviews: Review[],
   similarFilms: Film[],
   currentFilm: Film|null,
+  favoriteFilms: Film[],
+  promoFilm: Film|null
 }
 
 export const initialState:AppState = {
   similarFilms: [],
+  favoriteFilms: [],
   reviews: [],
   currentFilm: null,
+  promoFilm: null
 };
 
 export const filmReducer = createSlice({
@@ -22,6 +32,10 @@ export const filmReducer = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder
+      .addCase(getPromoFilmAction.fulfilled, (state, action) => {
+        state.promoFilm = action.payload;
+        state.currentFilm = action.payload;
+      })
       .addCase(getFilmInfoAction.fulfilled, (state, action) => {
         state.currentFilm = action.payload;
       })
@@ -30,6 +44,12 @@ export const filmReducer = createSlice({
       })
       .addCase(getFilmSimilarAction.fulfilled, (state, action) => {
         state.similarFilms = action.payload;
+      })
+      .addCase(getFavoriteFilmsAction.fulfilled, (state, action) => {
+        state.favoriteFilms = action.payload;
+      })
+      .addCase(setFavoriteFilmAction.fulfilled, (state, action) => {
+        state.currentFilm = action.payload;
       });
   },
 });

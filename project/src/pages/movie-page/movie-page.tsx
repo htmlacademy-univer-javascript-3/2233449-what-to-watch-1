@@ -12,7 +12,6 @@ import {MyListButton} from '../../components/my-list-button';
 import {AuthorizationStatus} from '../../constants';
 import {getCurrentFilm, getSimilarFilms} from '../../store/film-reducer/selector';
 import {getAuthorizationStatus} from '../../store/user-reducer/selector';
-import {getFilms} from '../../store/data-reducer/selector';
 import {getFilmCommentAction, getFilmInfoAction, getFilmSimilarAction} from '../../api-action';
 
 export enum ActivePart {
@@ -26,7 +25,6 @@ function MoviePage() {
   const dispatch = useAppDispatch();
   const id = Number(params.id);
   const [activePagePart, setActivePagePart] = useState(ActivePart.OverviewPart);
-  const films = useAppSelector(getFilms);
   const currentFilm = useAppSelector(getCurrentFilm);
   const similarFilms = useAppSelector(getSimilarFilms);
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
@@ -37,7 +35,7 @@ function MoviePage() {
       dispatch(getFilmSimilarAction(id));
       dispatch(getFilmCommentAction(id));
     }
-  }, [currentFilm, dispatch, id]); //todo разобраться с deps
+  }, [currentFilm, dispatch, id]);
   if (!currentFilm) {
     return <NotFound/>;
   } else {
@@ -48,8 +46,6 @@ function MoviePage() {
             <div className="film-card__bg">
               <img src={currentFilm?.backgroundImage} alt={currentFilm?.name}/>
             </div>
-
-            <h1 className="visually-hidden">WTW</h1>
 
             <header className="page-header film-card__head">
               <Logo className="logo__link"/>
@@ -65,11 +61,11 @@ function MoviePage() {
                 </p>
 
                 <div className="film-card__buttons">
-                  <PlayButton filmId={currentFilm.id + 1}/>
-                  <MyListButton length={films.length}/>
+                  <PlayButton filmId={currentFilm.id}/>
+                  <MyListButton/>
                   {
                     authorizationStatus === AuthorizationStatus.Auth ?
-                      <Link to={`/films/${id + 1}/review`} className="btn film-card__button">Add review</Link>
+                      <Link to={`/films/${id}/review`} className="btn film-card__button">Add review</Link>
                       : null
                   }
                 </div>

@@ -10,10 +10,12 @@ import {PlayButton} from '../../components/play-button';
 import {MyListButton} from '../../components/my-list-button';
 import {getFilms} from '../../store/data-reducer/selector';
 import {getCurrentGenre} from '../../store/genre-reducer/selector';
+import {getPromoFilm} from '../../store/film-reducer/selector';
 
 function Main() {
   const currentGenre = useAppSelector(getCurrentGenre);
   const films = useAppSelector(getFilms);
+  const promoFilm = useAppSelector(getPromoFilm);
   const filteredFilms = currentGenre === 'All genres' ? films : films.filter((film) => film.genre === currentGenre);
   const genres = [...new Set(films.map((film) => film.genre))];
   genres.unshift('All genres');
@@ -23,7 +25,7 @@ function Main() {
     <>
       <section className='film-card'>
         <div className='film-card__bg'>
-          <img src={films[0].backgroundImage} alt={films[0].name}/>
+          <img src={promoFilm?.backgroundImage} alt={promoFilm?.name}/>
         </div>
 
         <header className='page-header film-card__head'>
@@ -34,21 +36,21 @@ function Main() {
         <div className='film-card__wrap'>
           <div className='film-card__info'>
             <div className='film-card__poster'>
-              <img src={films[0].posterImage} alt={films[0].posterImage}
+              <img src={promoFilm?.posterImage} alt={promoFilm?.name}
                 width='218' height='327'
               />
             </div>
 
             <div className='film-card__desc'>
-              <h2 className='film-card__title'>{films[0].name}</h2>
+              <h2 className='film-card__title'>{promoFilm?.name}</h2>
               <p className='film-card__meta'>
-                <span className='film-card__genre'>{films[0].genre}</span>
-                <span className='film-card__year'>{films[0].released}</span>
+                <span className='film-card__genre'>{promoFilm?.genre}</span>
+                <span className='film-card__year'>{promoFilm?.released}</span>
               </p>
 
               <div className='film-card__buttons'>
-                <PlayButton filmId={films[0].id + 1}/>
-                <MyListButton length={films.length}/>
+                <PlayButton filmId={promoFilm?.id}/>
+                <MyListButton/>
               </div>
             </div>
           </div>
