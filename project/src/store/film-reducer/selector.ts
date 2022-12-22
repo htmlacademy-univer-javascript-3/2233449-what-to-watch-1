@@ -6,3 +6,5 @@ import {Review} from '../../types/review';
 export const getSimilarFilms = (state: State): Film[] => state[NameSpace.Films].similarFilms;
 export const getCurrentFilm = (state: State): Film|null => state[NameSpace.Films].currentFilm;
 export const getReviews = (state: State): Review[] => state[NameSpace.Films].reviews;
+export const getFavoriteFilms = (state: State): Film[] => state[NameSpace.Films].favoriteFilms;
+export const getPromoFilm = (state: State): Film|null => state[NameSpace.Films].promoFilm;
