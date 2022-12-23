@@ -11,11 +11,14 @@ import {MyListButton} from '../../components/my-list-button';
 import {getFilms} from '../../store/data-reducer/selector';
 import {getCurrentGenre} from '../../store/genre-reducer/selector';
 import {getPromoFilm} from '../../store/film-reducer/selector';
+import {AuthorizationStatus} from '../../constants';
+import {getAuthorizationStatus} from '../../store/user-reducer/selector';
 
 function Main() {
   const currentGenre = useAppSelector(getCurrentGenre);
   const films = useAppSelector(getFilms);
   const promoFilm = useAppSelector(getPromoFilm);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const filteredFilms = currentGenre === 'All genres' ? films : films.filter((film) => film.genre === currentGenre);
   const genres = [...new Set(films.map((film) => film.genre))];
   genres.unshift('All genres');
@@ -50,7 +53,11 @@ function Main() {
 
               <div className='film-card__buttons'>
                 <PlayButton filmId={promoFilm?.id}/>
-                <MyListButton/>
+                {
+                  authorizationStatus === AuthorizationStatus.Auth ?
+                    <MyListButton/>
+                    : null
+                }
               </div>
             </div>
           </div>

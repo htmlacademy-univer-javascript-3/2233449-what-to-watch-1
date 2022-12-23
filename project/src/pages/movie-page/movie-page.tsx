@@ -62,7 +62,11 @@ function MoviePage() {
 
                 <div className="film-card__buttons">
                   <PlayButton filmId={currentFilm.id}/>
-                  <MyListButton/>
+                  {
+                    authorizationStatus === AuthorizationStatus.Auth ?
+                      <MyListButton/>
+                      : null
+                  }
                   {
                     authorizationStatus === AuthorizationStatus.Auth ?
                       <Link to={`/films/${id}/review`} className="btn film-card__button">Add review</Link>
