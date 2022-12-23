@@ -1,7 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {AuthorizationStatus, NameSpace} from '../../constants';
 import {UserData} from '../../types/user-data-type';
-import {checkLoginAction, loginAction, logoutAction} from '../../api-action';
+import {checkLoginAction, loginAction, logoutAction} from '../../api/api-action-user';
 
 export type UserReducer = {
   authorizationStatus: AuthorizationStatus,

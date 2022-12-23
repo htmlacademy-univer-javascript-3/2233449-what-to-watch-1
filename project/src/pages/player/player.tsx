@@ -5,7 +5,7 @@ import {useAppDispatch, useAppSelector} from '../../hooks';
 import {getCurrentFilm} from '../../store/film-reducer/selector';
 import {MAIN_ROUTE} from '../../constants';
 import {Link, useParams} from 'react-router-dom';
-import {getFilmInfoAction} from '../../api-action';
+import {getFilmInfoAction} from '../../api/api-action-film';
 
 function Player() {
   const film = useAppSelector(getCurrentFilm);

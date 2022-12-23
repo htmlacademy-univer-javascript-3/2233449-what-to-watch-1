@@ -12,7 +12,7 @@ import {MyListButton} from '../../components/my-list-button';
 import {AuthorizationStatus} from '../../constants';
 import {getCurrentFilm, getSimilarFilms} from '../../store/film-reducer/selector';
 import {getAuthorizationStatus} from '../../store/user-reducer/selector';
-import {getFilmCommentAction, getFilmInfoAction, getFilmSimilarAction} from '../../api-action';
+import {getFilmCommentAction, getFilmInfoAction, getFilmSimilarAction} from '../../api/api-action-film';
 
 export enum ActivePart {
   OverviewPart = 1,

@@ -2,7 +2,7 @@ import {useAppDispatch, useAppSelector} from '../hooks';
 import {
   getFilmInfoAction,
   setFavoriteFilmAction
-} from '../api-action';
+} from '../api/api-action-film';
 import {getCurrentFilm, getFavoriteFilms} from '../store/film-reducer/selector';
 
 

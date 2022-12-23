@@ -1,6 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {NameSpace} from '../../constants';
-import {getFilmsAction} from '../../api-action';
+import {getFilmsAction} from '../../api/api-action-film';
 import {Film} from '../../types/film';
 
 type DataReducer = {

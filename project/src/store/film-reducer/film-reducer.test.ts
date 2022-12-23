@@ -4,10 +4,10 @@ import {
   getFilmInfoAction,
   getFilmSimilarAction,
   getPromoFilmAction, setFavoriteFilmAction
-} from '../api-action';
-import filmReducer from '../store/film-reducer/film-reducer';
-import {Film} from '../types/film';
-import {Review} from '../types/review';
+} from '../../api/api-action-film';
+import filmReducer from './film-reducer';
+import {Film} from '../../types/film';
+import {Review} from '../../types/review';
 
 describe('Reducer: user', () => {
   it('should not change state when unknown action', () => {

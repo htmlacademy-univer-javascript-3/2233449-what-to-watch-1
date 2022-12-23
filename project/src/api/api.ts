@@ -1,5 +1,5 @@
 import axios, {AxiosInstance, AxiosRequestConfig} from 'axios';
-import {getToken} from './token';
+import {getToken} from '../token';
 
 const URL = 'https://10.react.pages.academy/wtw';
 const REQUEST_TIMEOUT = 5000;

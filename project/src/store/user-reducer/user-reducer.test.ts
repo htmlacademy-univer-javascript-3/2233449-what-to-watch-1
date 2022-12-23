@@ -1,7 +1,7 @@
-import {userReducer} from '../store/user-reducer/user-reducer';
-import {AuthorizationStatus} from '../constants';
-import {UserData} from '../types/user-data-type';
-import {checkLoginAction, loginAction, logoutAction} from '../api-action';
+import {userReducer} from './user-reducer';
+import {AuthorizationStatus} from '../../constants';
+import {UserData} from '../../types/user-data-type';
+import {checkLoginAction, loginAction, logoutAction} from '../../api/api-action-user';
 
 describe('Reducer: user', () => {
   it('should no auth when unknown action', () => {

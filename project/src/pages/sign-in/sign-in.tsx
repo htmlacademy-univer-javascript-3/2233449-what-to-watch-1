@@ -4,7 +4,7 @@ import {renderSignInMessage} from './sign-in-message';
 import Footer from '../../components/footer';
 import {useAppDispatch} from '../../hooks';
 import {MAIN_ROUTE} from '../../constants';
-import {loginAction} from '../../api-action';
+import {loginAction} from '../../api/api-action-user';
 import {ChangeEvent, FormEvent, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {AuthData} from '../../types/auth-data';

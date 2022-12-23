@@ -1,6 +1,6 @@
-import {dataReducer} from "../store/data-reducer/data-reducer";
-import {getFilmsAction} from "../api-action";
-import {Film} from "../types/film";
+import {dataReducer} from './data-reducer';
+import {getFilmsAction} from '../../api/api-action-film';
+import {Film} from '../../types/film';
 
 describe('Reducer: data', () => {
   it('should not change state when unknown action', () => {
@@ -20,4 +20,4 @@ describe('Reducer: data', () => {
     expect(dataReducer.reducer(state, {type: getFilmsAction.fulfilled, payload: [film]}))
       .toEqual({films: [film], isDataLoaded: true});
   });
-})
+});

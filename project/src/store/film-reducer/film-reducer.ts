@@ -8,7 +8,7 @@ import {
   getFilmInfoAction,
   getFilmSimilarAction, getPromoFilmAction,
   setFavoriteFilmAction
-} from '../../api-action';
+} from '../../api/api-action-film';
 
 export type AppState = {
   reviews: Review[],

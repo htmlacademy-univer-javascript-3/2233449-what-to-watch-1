@@ -1,7 +1,7 @@
 import {FormEvent, useState} from 'react';
 import {useAppDispatch, useAppSelector} from '../hooks';
 import {useNavigate} from 'react-router-dom';
-import {postCommentAction} from '../api-action';
+import {postCommentAction} from '../api/api-action-film';
 import {FILM_ROUTE} from '../constants';
 import {getCurrentFilm} from '../store/film-reducer/selector';
 
