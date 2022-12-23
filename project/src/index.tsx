@@ -5,6 +5,7 @@ import {Provider} from 'react-redux';
 import {store} from './store';
 import {checkLoginAction} from './api/api-action-user';
 import {getFavoriteFilmsAction, getFilmsAction, getPromoFilmAction} from './api/api-action-film';
+import {BrowserRouter} from 'react-router-dom';
 
 store.dispatch(getFilmsAction());
 store.dispatch(getPromoFilmAction());
@@ -18,7 +19,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App/>
+      <BrowserRouter>
+        <App/>
+      </BrowserRouter>
     </Provider>
   </React.StrictMode>,
 );

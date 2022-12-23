@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import {Routes, Route} from 'react-router-dom';
 import SignIn from '../../pages/sign-in/sign-in';
 import MyList from '../../pages/my-list/my-list';
 import MoviePage from '../../pages/movie-page/movie-page';
@@ -21,17 +21,15 @@ function App(): JSX.Element {
     );
   }
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Main/>}/>
-        <Route path="/login" element={<SignIn/>}/>
-        <Route path="/mylist" element={<PrivateRoute destinationPage={<MyList/>}/>}/>
-        <Route path="/films/:id" element={<MoviePage/>}/>
-        <Route path="/films/:id/review" element={<AddReview/>}/>
-        <Route path="/player/:id" element={<Player/>}/>
-        <Route path="/*" element={<NotFound/>}/>
-      </Routes>
-    </BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Main/>}/>
+      <Route path="/login" element={<SignIn/>}/>
+      <Route path="/mylist" element={<PrivateRoute destinationPage={<MyList/>}/>}/>
+      <Route path="/films/:id" element={<MoviePage/>}/>
+      <Route path="/films/:id/review" element={<AddReview/>}/>
+      <Route path="/player/:id" element={<Player/>}/>
+      <Route path="/*" element={<NotFound/>}/>
+    </Routes>
   );
 }
 
