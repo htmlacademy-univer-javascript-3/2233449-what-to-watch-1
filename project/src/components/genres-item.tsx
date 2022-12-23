@@ -13,7 +13,7 @@ function GenresItem(props: GenresProps) {
   const dispatch = useAppDispatch();
   const handleLinkClick = (e: MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    dispatch(changeGenre({currentGenre: props.name}));
+    dispatch(changeGenre(props.name));
     props.setVisibleFilmsCount(VISIBLE_FILMS_COUNT);
   };
 

@@ -19,7 +19,7 @@ function UserBlock() {
             </div>
           </li>
           <li className="user-block__item">
-            <button onClick={() => dispatch(logoutAction())} className="user-block__link">Sign out</button>
+            <Link onClick={() => dispatch(logoutAction())} className="user-block__link" to={'/'}>Sign out</Link>
           </li>
         </> :
         <li className="user-block__item">
