@@ -1,4 +1,4 @@
-import {Review} from '../types/review';
+import {Review} from '../../types/review';
 
 
 function ReviewCard({id, comment, user, date, rating}: Review) {

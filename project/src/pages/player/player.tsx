@@ -1,5 +1,5 @@
-import {RenderPauseButton} from '../../components/play-pause-button/pause_button';
-import {RenderPlayButton} from '../../components/play-pause-button/play_button';
+import {PauseButtonIconAndText} from '../../components/play-pause-button/pause_button';
+import {PlayButtonIconAndText} from '../../components/play-pause-button/play_button';
 import {useEffect, useRef, useState} from 'react';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {getCurrentFilm} from '../../store/film-reducer/selector';
@@ -83,7 +83,7 @@ function Player() {
 
         <div className="player__controls-row">
           <button type="button" className="player__play" onClick={handleIsPlayClick}>
-            {isPlaying ? RenderPauseButton() : RenderPlayButton()}
+            {isPlaying ? PauseButtonIconAndText() : PlayButtonIconAndText()}
           </button>
           <div className="player__name">Transpotting</div>
           <button type="button" className="player__full-screen" onClick={handleFullScreenVideo}>

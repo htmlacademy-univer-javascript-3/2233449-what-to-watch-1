@@ -1,6 +1,6 @@
-import Logo from '../../components/logo';
-import UserBlock from '../../components/user-block';
-import ReviewForm from '../../components/review-form';
+import Logo from '../../components/logo/logo';
+import UserBlock from '../../components/user-block/user-block';
+import ReviewForm from '../../components/review-form/review-form';
 import {useAppSelector} from '../../hooks';
 import {getCurrentFilm} from '../../store/film-reducer/selector';
 

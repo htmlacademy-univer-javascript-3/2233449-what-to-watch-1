@@ -1,8 +1,8 @@
-import {useAppDispatch, useAppSelector} from '../hooks';
-import {logoutAction} from '../api/api-action-user';
-import {AuthorizationStatus, LOGIN_ROUT} from '../constants';
+import {useAppDispatch, useAppSelector} from '../../hooks';
+import {logoutAction} from '../../api/api-action-user';
+import {AuthorizationStatus, LOGIN_ROUT} from '../../constants';
 import {Link, useNavigate} from 'react-router-dom';
-import {getAuthorizationStatus, getUser} from '../store/user-reducer/selector';
+import {getAuthorizationStatus, getUser} from '../../store/user-reducer/selector';
 
 function UserBlock() {
   const dispatch = useAppDispatch();

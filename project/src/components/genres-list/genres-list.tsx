@@ -1,4 +1,4 @@
-import GenresItem from './genres-item';
+import GenresItem from '../genres-item/genres-item';
 import {Dispatch, SetStateAction} from 'react';
 
 export type GenresListProps = {

@@ -1,4 +1,4 @@
-function Spinner(): JSX.Element {
+function LoadingPage() {
   return (
     <div>
       <span>Загрузка</span>
@@ -6,4 +6,4 @@ function Spinner(): JSX.Element {
   );
 }
 
-export default Spinner;
+export default LoadingPage;

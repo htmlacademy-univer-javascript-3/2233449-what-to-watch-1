@@ -1,4 +1,4 @@
-import Logo from '../../components/logo';
+import Logo from '../../components/logo/logo';
 import {Link} from 'react-router-dom';
 
 function NotFound() {

@@ -1,7 +1,7 @@
 import {Dispatch, MouseEvent, SetStateAction} from 'react';
-import {useAppDispatch} from '../hooks';
-import {VISIBLE_FILMS_COUNT} from '../constants';
-import {changeGenre} from '../store/genre-reducer/genre-reducer';
+import {useAppDispatch} from '../../hooks';
+import {VISIBLE_FILMS_COUNT} from '../../constants';
+import {changeGenre} from '../../store/genre-reducer/genre-reducer';
 
 type GenresProps = {
   name: string,

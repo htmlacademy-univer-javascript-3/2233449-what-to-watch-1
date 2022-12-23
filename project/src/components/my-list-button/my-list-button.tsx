@@ -1,9 +1,9 @@
-import {useAppDispatch, useAppSelector} from '../hooks';
+import {useAppDispatch, useAppSelector} from '../../hooks';
 import {
   getFilmInfoAction,
   setFavoriteFilmAction
-} from '../api/api-action-film';
-import {getCurrentFilm, getFavoriteFilms} from '../store/film-reducer/selector';
+} from '../../api/api-action-film';
+import {getCurrentFilm, getFavoriteFilms} from '../../store/film-reducer/selector';
 
 
 export function MyListButton() {
