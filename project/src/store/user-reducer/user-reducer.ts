@@ -9,7 +9,7 @@ export type UserReducer = {
 }
 
 const initialState: UserReducer = {
-  authorizationStatus: AuthorizationStatus.Unknown,
+  authorizationStatus: AuthorizationStatus.NoAuth,
   user: null,
 };
 
@@ -24,6 +24,7 @@ export const userReducer = createSlice({
       })
       .addCase(checkLoginAction.rejected, (state) => {
         state.authorizationStatus = AuthorizationStatus.NoAuth;
+        state.user = null;
       })
       .addCase(loginAction.fulfilled, (state, action) => {
         state.authorizationStatus = AuthorizationStatus.Auth;
