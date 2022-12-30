@@ -19,8 +19,9 @@ export const userReducer = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder
-      .addCase(checkLoginAction.fulfilled, (state) => {
+      .addCase(checkLoginAction.fulfilled, (state, action) => {
         state.authorizationStatus = AuthorizationStatus.Auth;
+        state.user = action.payload;
       })
       .addCase(checkLoginAction.rejected, (state) => {
         state.authorizationStatus = AuthorizationStatus.NoAuth;
@@ -32,6 +33,7 @@ export const userReducer = createSlice({
       })
       .addCase(loginAction.rejected, (state) => {
         state.authorizationStatus = AuthorizationStatus.NoAuth;
+        state.user = null;
       })
       .addCase(logoutAction.fulfilled, (state) => {
         state.authorizationStatus = AuthorizationStatus.NoAuth;
