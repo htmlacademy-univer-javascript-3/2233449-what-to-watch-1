@@ -8,7 +8,7 @@ import {
   getFilmInfoAction,
   getFilmSimilarAction, getPromoFilmAction,
   setFavoriteFilmAction
-} from '../../api-action';
+} from '../../api/api-action-film';
 
 export type AppState = {
   reviews: Review[],
@@ -50,6 +50,11 @@ export const filmReducer = createSlice({
       })
       .addCase(setFavoriteFilmAction.fulfilled, (state, action) => {
         state.currentFilm = action.payload;
+        if (state.currentFilm.isFavorite)
+        {state.favoriteFilms.push(state.currentFilm);}
+        else {
+          state.favoriteFilms = state.favoriteFilms.filter((film)=>film.id !== state.currentFilm?.id);
+        }
       });
   },
 });

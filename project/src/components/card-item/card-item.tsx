@@ -1,6 +1,6 @@
 import {Link} from 'react-router-dom';
-import VideoPlayer from './video-player';
-import {Film} from '../types/film';
+import VideoPlayer from '../video-player/video-player';
+import {Film} from '../../types/film';
 import {useEffect, useState} from 'react';
 
 interface CardProps {

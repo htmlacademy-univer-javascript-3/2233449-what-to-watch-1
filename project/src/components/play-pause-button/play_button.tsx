@@ -1,4 +1,4 @@
-export function RenderPlayButton() {
+export function PlayButtonIconAndText() {
   return (
     <>
       <svg viewBox="0 0 19 19" width="19" height="19">

@@ -1,6 +1,6 @@
 import {Navigate} from 'react-router-dom';
 import {useAppSelector} from '../../hooks';
-import {LOGIN_ROUT} from '../../constants';
+import {AuthorizationStatus, LOGIN_ROUT} from '../../constants';
 import {getAuthorizationStatus} from '../../store/user-reducer/selector';
 
 type PrivateRouterProps = {
@@ -13,7 +13,7 @@ function PrivateRoute({destinationPage}: PrivateRouterProps) {
     <div>
       {
         (() => {
-          if (authorizationStatus) {
+          if (authorizationStatus === AuthorizationStatus.Auth) {
             return destinationPage;
           } else {
             return <Navigate to={LOGIN_ROUT}/>;

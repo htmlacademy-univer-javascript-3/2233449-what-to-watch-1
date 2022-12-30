@@ -1,21 +1,24 @@
-import Logo from '../../components/logo';
-import Footer from '../../components/footer';
-import UserBlock from '../../components/user-block';
-import FilmsList from '../../components/films-list';
-import GenresList from '../../components/genres-list';
+import Logo from '../../components/logo/logo';
+import Footer from '../../components/footer/footer';
+import UserBlock from '../../components/user-block/user-block';
+import FilmsList from '../../components/films-list/films-list';
+import GenresList from '../../components/genres-list/genres-list';
 import {useAppSelector} from '../../hooks';
-import ShowMoreButton from '../../components/show-more-button';
+import ShowMoreButton from '../../components/show-more-button/show-more-button';
 import {useState} from 'react';
-import {PlayButton} from '../../components/play-button';
-import {MyListButton} from '../../components/my-list-button';
+import {PlayButton} from '../../components/play-button/play-button';
+import {MyListButton} from '../../components/my-list-button/my-list-button';
 import {getFilms} from '../../store/data-reducer/selector';
 import {getCurrentGenre} from '../../store/genre-reducer/selector';
 import {getPromoFilm} from '../../store/film-reducer/selector';
+import {AuthorizationStatus} from '../../constants';
+import {getAuthorizationStatus} from '../../store/user-reducer/selector';
 
 function Main() {
   const currentGenre = useAppSelector(getCurrentGenre);
   const films = useAppSelector(getFilms);
   const promoFilm = useAppSelector(getPromoFilm);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const filteredFilms = currentGenre === 'All genres' ? films : films.filter((film) => film.genre === currentGenre);
   const genres = [...new Set(films.map((film) => film.genre))];
   genres.unshift('All genres');
@@ -50,7 +53,11 @@ function Main() {
 
               <div className='film-card__buttons'>
                 <PlayButton filmId={promoFilm?.id}/>
-                <MyListButton/>
+                {
+                  authorizationStatus === AuthorizationStatus.Auth ?
+                    <MyListButton/>
+                    : null
+                }
               </div>
             </div>
           </div>

@@ -1,9 +1,9 @@
-import {useAppDispatch, useAppSelector} from '../hooks';
+import {useAppDispatch, useAppSelector} from '../../hooks';
 import {
-  getFavoriteFilmsAction, getFilmInfoAction,
+  getFilmInfoAction,
   setFavoriteFilmAction
-} from '../api-action';
-import {getCurrentFilm, getFavoriteFilms} from '../store/film-reducer/selector';
+} from '../../api/api-action-film';
+import {getCurrentFilm, getFavoriteFilms} from '../../store/film-reducer/selector';
 
 
 export function MyListButton() {
@@ -15,7 +15,6 @@ export function MyListButton() {
     <button className='btn btn--list film-card__button' type='button' onClick={() => {
       const status = Number(!currentFilm?.isFavorite);
       dispatch(setFavoriteFilmAction({filmId: Number(currentFilm?.id), status: status}));
-      dispatch(getFavoriteFilmsAction());
       dispatch(getFilmInfoAction(currentFilm?.id as number));
     }}
     >

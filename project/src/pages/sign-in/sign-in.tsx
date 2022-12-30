@@ -1,10 +1,10 @@
-import Logo from '../../components/logo';
+import Logo from '../../components/logo/logo';
 import {renderSignInError} from './sign-in-error';
 import {renderSignInMessage} from './sign-in-message';
-import Footer from '../../components/footer';
+import Footer from '../../components/footer/footer';
 import {useAppDispatch} from '../../hooks';
 import {MAIN_ROUTE} from '../../constants';
-import {loginAction} from '../../api-action';
+import {loginAction} from '../../api/api-action-user';
 import {ChangeEvent, FormEvent, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {AuthData} from '../../types/auth-data';

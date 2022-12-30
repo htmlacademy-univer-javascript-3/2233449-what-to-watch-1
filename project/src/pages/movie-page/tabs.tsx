@@ -1,6 +1,6 @@
 import {ActivePart} from './movie-page';
 import {useAppSelector} from '../../hooks';
-import ReviewCard from '../../components/review-card';
+import ReviewCard from '../../components/review-card/review-card';
 import {getCurrentFilm, getReviews} from '../../store/film-reducer/selector';
 
 interface TabsProps {

@@ -14,7 +14,7 @@ export const genreReducer = createSlice({
   initialState,
   reducers: {
     changeGenre: (state, action) => {
-      state.currentGenre = action.payload.currentGenre;
+      state.currentGenre = action.payload;
     }
   }
 });

@@ -1,5 +1,5 @@
 import {Dispatch, SetStateAction} from 'react';
-import {VISIBLE_FILMS_COUNT} from '../constants';
+import {VISIBLE_FILMS_COUNT} from '../../constants';
 
 type ShowMoreProps = {
   isVisible: boolean,
