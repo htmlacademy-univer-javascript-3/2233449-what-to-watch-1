@@ -35,6 +35,16 @@ function getStringRating(rating: number) {
   return 'Awesome';
 }
 
+function getStringTime(time: number) {
+  const hours = time / 60;
+  const minutes = time % 60;
+  if (hours > 0) {
+    return `${hours} h ${minutes} m`;
+  } else {
+    return `${minutes} m`;
+  }
+}
+
 function FilmInfo() {
   const currentFilm = useAppSelector(getCurrentFilm);
   return (
@@ -82,7 +92,10 @@ function FilmDetails() {
       <div className="film-card__text-col">
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Run Time</strong>
-          <span className="film-card__details-value">{currentFilm?.runTime}</span>
+          <span
+            className="film-card__details-value"
+          >{currentFilm?.runTime ? getStringTime(currentFilm?.runTime) : ''}
+          </span>
         </p>
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Genre</strong>
@@ -90,7 +103,7 @@ function FilmDetails() {
         </p>
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Released</strong>
-          <span className="film-card__details-value">{currentFilm?.genre}</span>
+          <span className="film-card__details-value">{currentFilm?.released}</span>
         </p>
       </div>
     </div>

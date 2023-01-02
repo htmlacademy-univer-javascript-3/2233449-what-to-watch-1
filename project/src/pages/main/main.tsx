@@ -15,12 +15,13 @@ import {AuthorizationStatus} from '../../constants';
 import {getAuthorizationStatus} from '../../store/user-reducer/selector';
 
 function Main() {
+  const visibleGenresCount = 9;
   const currentGenre = useAppSelector(getCurrentGenre);
   const films = useAppSelector(getFilms);
   const promoFilm = useAppSelector(getPromoFilm);
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const filteredFilms = currentGenre === 'All genres' ? films : films.filter((film) => film.genre === currentGenre);
-  const genres = [...new Set(films.map((film) => film.genre))];
+  const genres = [...new Set(films.map((film) => film.genre))].slice(0, visibleGenresCount);
   genres.unshift('All genres');
 
   const [visibleFilmsCount, setVisibleFilmsCount] = useState<number>(8);

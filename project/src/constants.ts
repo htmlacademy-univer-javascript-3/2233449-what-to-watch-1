@@ -9,6 +9,7 @@ export const COMMENTS_ROUTE = '/comments';
 export const LOGIN_ROUT = '/login';
 export const LOGOUT_ROUT = '/logout';
 export const MAIN_ROUTE = '/';
+export const PLAYER_ROUTE = '/player';
 
 export const ALL_GENRES = 'All genres';
 

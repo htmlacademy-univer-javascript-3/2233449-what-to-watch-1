@@ -1,5 +1,6 @@
 import {Link} from 'react-router-dom';
 import {PlayButtonIconAndText} from '../play-pause-button/play_button';
+import {PLAYER_ROUTE} from '../../constants';
 
 class PlayButtonProps {
   filmId: number | undefined;
@@ -7,7 +8,7 @@ class PlayButtonProps {
 
 export function PlayButton(props:PlayButtonProps) {
   return (
-    <Link className="btn btn--play film-card__button" to={`/player/${props.filmId}`}>
+    <Link className="btn btn--play film-card__button" to={`${PLAYER_ROUTE}/${props.filmId}`}>
       <PlayButtonIconAndText/>
     </Link>
   );

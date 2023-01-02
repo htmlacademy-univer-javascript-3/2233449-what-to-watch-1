@@ -3,30 +3,22 @@ import {PlayButtonIconAndText} from '../../components/play-pause-button/play_but
 import {useEffect, useRef, useState} from 'react';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {getCurrentFilm} from '../../store/film-reducer/selector';
-import {MAIN_ROUTE} from '../../constants';
-import {Link, useParams} from 'react-router-dom';
+import {FILM_ROUTE} from '../../constants';
+import {Link} from 'react-router-dom';
 import {getFilmInfoAction} from '../../api/api-action-film';
+import moment from 'moment';
 
 function Player() {
   const film = useAppSelector(getCurrentFilm);
   const [isPlaying, setIsPlaying] = useState(false);
-  const params = useParams();
   const dispatch = useAppDispatch();
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [progress, setProgress] = useState(0);
   const [timeLeft, setTimeLeft] = useState(0);
 
   useEffect(() => {
-    dispatch(getFilmInfoAction(Number(params?.id)));
-
-    if (videoRef.current === null) {
-      return;
-    }
-
-    if (!isPlaying) {
-      videoRef.current.load();
-    }
-  }, [params.id, dispatch, isPlaying]);
+    dispatch(getFilmInfoAction(Number(film?.id)));
+  }, [dispatch, film?.id]);
 
   const handleIsPlayClick = () => {
     if (videoRef.current?.paused) {
@@ -55,12 +47,9 @@ function Player() {
   };
 
   const formatTime = (seconds: number) => {
-    const date = new Date(seconds * 1000);
-    let format = date.toISOString().slice(11, 19).toString();
-    if (format.startsWith('00')) {
-      format = format.substring(3);
-    }
-    return `-${format}`;
+    if (seconds / 60 / 60 >= 1) {
+      return moment(seconds * 1000).format('-hh:mm:ss');}
+    return moment(seconds * 1000).format('-mm:ss');
   };
 
   return (
@@ -70,7 +59,7 @@ function Player() {
         onTimeUpdate={(event) => handleProgressBar()}
       />
 
-      <Link type="button" className="player__exit" to={MAIN_ROUTE}>Exit</Link>
+      <Link type="button" className="player__exit" to={`${FILM_ROUTE}/${film?.id}`}>Exit</Link>
 
       <div className="player__controls">
         <div className="player__controls-row">
@@ -78,7 +67,7 @@ function Player() {
             <progress className="player__progress" value={progress} max="100"/>
             <div className="player__toggler" style={{left: `${progress}%`}}>Toggler</div>
           </div>
-          <div className="player__time-value">{formatTime(Number(timeLeft))}</div>
+          <div className="player__time-value">{(formatTime(timeLeft))}</div>
         </div>
 
         <div className="player__controls-row">
