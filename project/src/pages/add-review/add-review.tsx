@@ -13,9 +13,6 @@ function AddReview() {
         <div className="film-card__bg">
           <img src={currentFilm?.backgroundImage} alt={currentFilm?.name}/>
         </div>
-
-        <h1 className="visually-hidden">WTW</h1>
-
         <header className="page-header">
           <Logo className="logo__link"/>
           <nav className="breadcrumbs">
