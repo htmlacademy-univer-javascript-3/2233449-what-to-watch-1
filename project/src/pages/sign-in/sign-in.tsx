@@ -10,7 +10,7 @@ import {useNavigate} from 'react-router-dom';
 import {AuthData} from '../../types/auth-data';
 
 function checkPassword(password: string) {
-  return (/[a-z]/.test(password)) && (/[0-9]/.test(password));
+  return ((/[a-z]/.test(password)) || (/[а-я]/.test(password))) && (/[0-9]/.test(password));
 }
 
 function SignIn() {
@@ -40,7 +40,7 @@ function SignIn() {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (email !== '' && password !== '' && checkPassword(password)) {
+    if (email !== '' && password !== '' && checkPassword(password.toLowerCase())) {
       onSubmit({
         email,
         password,
