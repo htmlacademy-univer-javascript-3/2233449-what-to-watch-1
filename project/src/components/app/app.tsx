@@ -1,6 +1,5 @@
 import React from 'react';
-import {Routes, Route} from 'react-router-dom';
-import SignIn from '../../pages/sign-in/sign-in';
+import {Route, Routes} from 'react-router-dom';
 import MyList from '../../pages/my-list/my-list';
 import MoviePage from '../../pages/movie-page/movie-page';
 import AddReview from '../../pages/add-review/add-review';
@@ -11,6 +10,8 @@ import Main from '../../pages/main/main';
 import Spinner from '../../pages/loading-page/loading-page';
 import {useAppSelector} from '../../hooks';
 import {getIsDataLoaded} from '../../store/data-reducer/selector';
+import {AuthorizationStatus, LOGIN_ROUT, MAIN_ROUTE} from '../../constants';
+import SignIn from '../../pages/sign-in/sign-in';
 
 function App(): JSX.Element {
   const isDataLoaded = useAppSelector(getIsDataLoaded);
@@ -23,10 +24,10 @@ function App(): JSX.Element {
   return (
     <Routes>
       <Route path="/" element={<Main/>}/>
-      <Route path="/login" element={<SignIn/>}/>
-      <Route path="/mylist" element={<PrivateRoute destinationPage={<MyList/>}/>}/>
+      <Route path="/login" element={<PrivateRoute status={AuthorizationStatus.NoAuth} destinationPage={<SignIn/>} redirectUrl={MAIN_ROUTE} />}/>
+      <Route path="/mylist" element={<PrivateRoute status={AuthorizationStatus.Auth} destinationPage={<MyList/>} redirectUrl={LOGIN_ROUT}/>}/>
       <Route path="/films/:id" element={<MoviePage/>}/>
-      <Route path="/films/:id/review" element={<PrivateRoute destinationPage={<AddReview/>}/>}/>
+      <Route path="/films/:id/review" element={<PrivateRoute status={AuthorizationStatus.Auth} destinationPage={<AddReview/>} redirectUrl={LOGIN_ROUT}/>}/>
       <Route path="/player/:id" element={<Player/>}/>
       <Route path="/*" element={<NotFound/>}/>
     </Routes>
