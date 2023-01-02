@@ -28,7 +28,7 @@ function VideoPlayer(props:PlayerProps) {
     <video
       ref={videoPlayerRef}
       src={props.film.videoLink}
-      poster={props.film.posterImage}
+      poster={props.film.previewImage}
       muted={props.muted}
       width={props.width}
       height={props.height}
