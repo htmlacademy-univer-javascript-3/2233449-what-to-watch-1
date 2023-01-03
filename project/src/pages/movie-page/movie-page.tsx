@@ -13,6 +13,7 @@ import {AuthorizationStatus, FILM_ROUTE} from '../../constants';
 import {getCurrentFilm, getSimilarFilms} from '../../store/film-reducer/selector';
 import {getAuthorizationStatus} from '../../store/user-reducer/selector';
 import {getFilmCommentAction, getFilmInfoAction, getFilmSimilarAction} from '../../api/api-action-film';
+import LoadingPage from '../loading-page/loading-page';
 
 export enum ActivePart {
   OverviewPart = 1,
@@ -39,6 +40,9 @@ function MoviePage() {
   if (!currentFilm) {
     return <NotFound/>;
   } else {
+    if (currentFilm.id !== id) {
+      return <LoadingPage/>;
+    }
     return (
       <>
         <section className="film-card film-card--full">

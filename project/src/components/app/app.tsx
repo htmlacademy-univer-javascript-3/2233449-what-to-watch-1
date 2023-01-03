@@ -7,7 +7,7 @@ import Player from '../../pages/player/player';
 import NotFound from '../../pages/page-not-found/page-not-found';
 import PrivateRoute from './private-route';
 import Main from '../../pages/main/main';
-import Spinner from '../../pages/loading-page/loading-page';
+import LoadingPage from '../../pages/loading-page/loading-page';
 import {useAppSelector} from '../../hooks';
 import {getIsDataLoaded} from '../../store/data-reducer/selector';
 import {AuthorizationStatus, LOGIN_ROUT, MAIN_ROUTE} from '../../constants';
@@ -18,7 +18,7 @@ function App(): JSX.Element {
 
   if (!isDataLoaded) {
     return (
-      <Spinner/>
+      <LoadingPage/>
     );
   }
   return (
