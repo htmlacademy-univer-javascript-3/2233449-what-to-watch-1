@@ -7,10 +7,12 @@ import {checkLoginAction} from './api/api-action-user';
 import {getFavoriteFilmsAction, getFilmsAction, getPromoFilmAction} from './api/api-action-film';
 import {BrowserRouter} from 'react-router-dom';
 
-store.dispatch(getFilmsAction());
-store.dispatch(getPromoFilmAction());
-store.dispatch(checkLoginAction());
-store.dispatch(getFavoriteFilmsAction());
+store.dispatch(checkLoginAction()).then(() => {
+  store.dispatch(getFilmsAction());
+  store.dispatch(getPromoFilmAction());
+  store.dispatch(getFavoriteFilmsAction());
+});
+
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
