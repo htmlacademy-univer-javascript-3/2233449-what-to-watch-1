@@ -2,6 +2,7 @@ import {Dispatch, MouseEvent, SetStateAction} from 'react';
 import {useAppDispatch} from '../../hooks';
 import {VISIBLE_FILMS_COUNT} from '../../constants';
 import {changeGenre} from '../../store/genre-reducer/genre-reducer';
+import {Link} from 'react-router-dom';
 
 type GenresProps = {
   name: string,
@@ -19,7 +20,7 @@ function GenresItem(props: GenresProps) {
 
   return (
     <li className={props.isActive ? 'catalog__genres-item catalog__genres-item--active' : 'catalog__genres-item'}>
-      <a href='#todo' className='catalog__genres-link' onClick={handleLinkClick}>{props.name}</a>
+      <Link to={'/'} className='catalog__genres-link' onClick={handleLinkClick}>{props.name}</Link>
     </li>
   );
 }

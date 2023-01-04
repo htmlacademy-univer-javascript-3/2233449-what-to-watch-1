@@ -3,6 +3,8 @@ import UserBlock from '../../components/user-block/user-block';
 import ReviewForm from '../../components/review-form/review-form';
 import {useAppSelector} from '../../hooks';
 import {getCurrentFilm} from '../../store/film-reducer/selector';
+import {FILM_ROUTE} from '../../constants';
+import {Link} from 'react-router-dom';
 
 function AddReview() {
   const currentFilm = useAppSelector(getCurrentFilm);
@@ -18,10 +20,10 @@ function AddReview() {
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <a href="film-page.html" className="breadcrumbs__link">{currentFilm?.name}</a>
+                <Link to={`${FILM_ROUTE}/${currentFilm?.id}`} className="breadcrumbs__link">{currentFilm?.name}</Link>
               </li>
               <li className="breadcrumbs__item">
-                <a href="#todo" className="breadcrumbs__link">Add review</a>
+                <Link to={`${FILM_ROUTE}/${currentFilm?.id}/review`} className="breadcrumbs__link">Add review</Link>
               </li>
             </ul>
           </nav>
