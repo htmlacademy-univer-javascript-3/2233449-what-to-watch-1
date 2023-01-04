@@ -4,7 +4,7 @@ import UserBlock from '../../components/user-block/user-block';
 import {useEffect, useState} from 'react';
 import {Link, useParams} from 'react-router-dom';
 import FilmsList from '../../components/films-list/films-list';
-import Tabs from './tabs';
+import Tabs from '../../components/tabs/tabs';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import NotFound from '../not-found/not-found';
 import {PlayButton} from '../../components/play-button/play-button';

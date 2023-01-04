@@ -1,5 +1,5 @@
-import {PauseButtonIconAndText} from '../../components/play-pause-button/pause_button';
-import {PlayButtonIconAndText} from '../../components/play-pause-button/play_button';
+import {PauseButtonIconAndText} from '../../components/play-pause-button/pause-button-icon-and-text';
+import {PlayButtonIconAndText} from '../../components/play-pause-button/play-button-icon-and-text';
 import {useEffect, useRef, useState} from 'react';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {getCurrentFilm} from '../../store/film-reducer/selector';
