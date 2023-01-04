@@ -9,14 +9,15 @@ import {clearToken, saveToken} from '../token';
 import {UserData} from '../types/user-data-type';
 import {AuthData} from '../types/auth-data';
 
-export const checkLoginAction = createAsyncThunk<void, undefined, {
+export const checkLoginAction = createAsyncThunk<UserData, undefined, {
   dispatch: AppDispatch,
   state: State,
   extra: AxiosInstance
 }>(
   'data/checkLogin',
   async (_arg, {dispatch, extra: api}) => {
-    await api.get<UserData>(LOGIN_ROUT);
+    const result = await api.get<UserData>(LOGIN_ROUT);
+    return result.data;
   }
 );
 

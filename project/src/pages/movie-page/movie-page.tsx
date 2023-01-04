@@ -4,15 +4,16 @@ import UserBlock from '../../components/user-block/user-block';
 import {useEffect, useState} from 'react';
 import {Link, useParams} from 'react-router-dom';
 import FilmsList from '../../components/films-list/films-list';
-import Tabs from './tabs';
+import Tabs from '../../components/tabs/tabs';
 import {useAppDispatch, useAppSelector} from '../../hooks';
-import NotFound from '../page-not-found/page-not-found';
+import NotFound from '../not-found/not-found';
 import {PlayButton} from '../../components/play-button/play-button';
 import {MyListButton} from '../../components/my-list-button/my-list-button';
-import {AuthorizationStatus} from '../../constants';
+import {AuthorizationStatus, FILM_ROUTE} from '../../constants';
 import {getCurrentFilm, getSimilarFilms} from '../../store/film-reducer/selector';
 import {getAuthorizationStatus} from '../../store/user-reducer/selector';
 import {getFilmCommentAction, getFilmInfoAction, getFilmSimilarAction} from '../../api/api-action-film';
+import LoadingPage from '../loading-page/loading-page';
 
 export enum ActivePart {
   OverviewPart = 1,
@@ -39,6 +40,9 @@ function MoviePage() {
   if (!currentFilm) {
     return <NotFound/>;
   } else {
+    if (currentFilm.id !== id) {
+      return <LoadingPage/>;
+    }
     return (
       <>
         <section className="film-card film-card--full">
@@ -69,7 +73,7 @@ function MoviePage() {
                   }
                   {
                     authorizationStatus === AuthorizationStatus.Auth ?
-                      <Link to={`/films/${id}/review`} className="btn film-card__button">Add review</Link>
+                      <Link to={`${FILM_ROUTE}/${id}/review`} className="btn film-card__button">Add review</Link>
                       : null
                   }
                 </div>

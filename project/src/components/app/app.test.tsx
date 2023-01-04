@@ -2,7 +2,7 @@ import {render, screen} from '@testing-library/react';
 import {Provider} from 'react-redux';
 import {configureMockStore} from '@jedmao/redux-mock-store';
 import App from './app';
-import {ALL_GENRES, AuthorizationStatus} from '../../constants';
+import {ALL_GENRES, AuthorizationStatus, LOGIN_ROUT} from '../../constants';
 import {MemoryRouter} from 'react-router-dom';
 import {createMockFilms} from '../../api/api-action.test';
 
@@ -35,7 +35,7 @@ describe('Application Routing', () => {
   });
 
   it('should render "AuthScreen" when user navigate to "/login"', () => {
-    initialEntries[0] = '/login';
+    initialEntries[0] = LOGIN_ROUT;
     render(fakeApp);
 
     expect(screen.getByLabelText('Email address')).toBeInTheDocument();

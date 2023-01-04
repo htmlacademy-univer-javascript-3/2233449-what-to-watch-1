@@ -8,8 +8,6 @@ export type GenresListProps = {
 }
 
 function GenresList({genres, activeGenre, setVisibleFilmsCount}: GenresListProps) {
-
-
   return (
     <ul className='catalog__genres-list'>
       {

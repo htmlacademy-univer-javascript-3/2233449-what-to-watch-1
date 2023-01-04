@@ -11,7 +11,7 @@ export const getFilmInfoAction = createAsyncThunk<Film, number, {
   extra: AxiosInstance
 }>(
   'data/film',
-  async (_arg, {dispatch, extra: api}) => await api.get<Film>(`${FILM_ROUTE}/${_arg}`).then(
+  async (id, {extra: api}) => await api.get<Film>(`${FILM_ROUTE}/${id}`).then(
     (result) => result.data
   ),
 );
@@ -22,7 +22,7 @@ export const getFilmCommentAction = createAsyncThunk<Review[], number, {
   extra: AxiosInstance
 }>(
   'data/review',
-  async (_arg, {dispatch, extra: api}) => await api.get<Review[]>(`${COMMENTS_ROUTE}/${_arg}`).then(
+  async (id, {extra: api}) => await api.get<Review[]>(`${COMMENTS_ROUTE}/${id}`).then(
     (result) => result.data
   ),
 );
@@ -33,7 +33,7 @@ export const getFavoriteFilmsAction = createAsyncThunk<Film[], undefined, {
   extra: AxiosInstance
 }>(
   'films/getFavourite',
-  async (_arg, {dispatch, extra: api}) => {
+  async (_arg, {extra: api}) => {
     const url = `${FAVORITES_ROUTE}`;
     const {data} = await api.get<Film[]>(url);
     return data;
@@ -50,7 +50,7 @@ export const setFavoriteFilmAction = createAsyncThunk<
   }
   >(
     'films/setFavorite',
-    async ({ filmId: id, status }, { dispatch, extra: api }) => {
+    async ({ filmId: id, status }, {extra: api }) => {
       const { data } = await api.post<Film>(`${FAVORITES_ROUTE}/${id}/${status}`);
       return data;
     }
@@ -62,8 +62,8 @@ export const getFilmSimilarAction = createAsyncThunk<Film[], number, {
   extra: AxiosInstance
 }>(
   'films/filmSimilar',
-  async (_arg, {dispatch, extra: api}) => {
-    const url = `${FILM_ROUTE}/${_arg}/${SIMILAR_ROUTE}`;
+  async (id, {extra: api}) => {
+    const url = `${FILM_ROUTE}/${id}/${SIMILAR_ROUTE}`;
     return await api.get<Film[]>(url).then(
       (result) => result.data
     );
@@ -82,10 +82,10 @@ export const postCommentAction = createAsyncThunk<Review, ReviewData, {
   extra: AxiosInstance
 }>(
   'data/postComment',
-  async (_arg, {dispatch, extra: api}) =>
-    await api.post(`${COMMENTS_ROUTE}/${_arg.filmId}`, {
-      comment: _arg.comment,
-      rating: _arg.rating
+  async (review, {extra: api}) =>
+    await api.post(`${COMMENTS_ROUTE}/${review.filmId}`, {
+      comment: review.comment,
+      rating: review.rating
     })
 );
 
@@ -95,7 +95,7 @@ export const getFilmsAction = createAsyncThunk<Film[], undefined, {
   extra: AxiosInstance
 }>(
   'data/getFilms',
-  async (_arg, {dispatch, extra: api}) => {
+  async (_arg, {extra: api}) => {
     const {data} = await api.get<Film[]>(FILM_ROUTE);
     return data;
   },

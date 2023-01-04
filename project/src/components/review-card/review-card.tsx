@@ -1,4 +1,5 @@
 import {Review} from '../../types/review';
+import moment from 'moment';
 
 
 function ReviewCard({id, comment, user, date, rating}: Review) {
@@ -9,7 +10,7 @@ function ReviewCard({id, comment, user, date, rating}: Review) {
 
         <footer className="review__details">
           <cite className="review__author">{user.name}</cite>
-          <time className="review__date" dateTime={date}>{new Date(date).toUTCString().split(' ').slice(1, 4).join(' ')}</time>
+          <time className="review__date" dateTime={date}>{moment(date).format('MMMM DD, YYYY')}</time>
         </footer>
       </blockquote>
 
