@@ -9,7 +9,6 @@ interface CardProps {
   onMouseOver: (film: Film) => void;
 }
 
-
 function Card({film, onMouseOver}: CardProps) {
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const [isNeedVideoToPlay, setIsNeedVideoPlay] = useState(false);
@@ -34,7 +33,7 @@ function Card({film, onMouseOver}: CardProps) {
   const navigate = useNavigate();
   return (
     <article className="small-film-card catalog__films-card"
-      onMouseOver={(evt) => {
+      onMouseOver={() => {
         onMouseOver(film);
         setIsNeedVideoPlay(true);
       }}

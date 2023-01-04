@@ -11,17 +11,16 @@ import {MyListButton} from '../../components/my-list-button/my-list-button';
 import {getFilms} from '../../store/data-reducer/selector';
 import {getCurrentGenre} from '../../store/genre-reducer/selector';
 import {getPromoFilm} from '../../store/film-reducer/selector';
-import {AuthorizationStatus} from '../../constants';
+import {AuthorizationStatus, VISIBLE_GENRES_COUNT} from '../../constants';
 import {getAuthorizationStatus} from '../../store/user-reducer/selector';
 
 function Main() {
-  const visibleGenresCount = 9;
   const currentGenre = useAppSelector(getCurrentGenre);
   const films = useAppSelector(getFilms);
   const promoFilm = useAppSelector(getPromoFilm);
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const filteredFilms = currentGenre === 'All genres' ? films : films.filter((film) => film.genre === currentGenre);
-  const genres = [...new Set(films.map((film) => film.genre))].slice(0, visibleGenresCount);
+  const genres = [...new Set(films.map((film) => film.genre))].slice(0, VISIBLE_GENRES_COUNT);
   genres.unshift('All genres');
 
   const [visibleFilmsCount, setVisibleFilmsCount] = useState<number>(8);
