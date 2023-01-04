@@ -6,7 +6,7 @@ import {Link, useParams} from 'react-router-dom';
 import FilmsList from '../../components/films-list/films-list';
 import Tabs from './tabs';
 import {useAppDispatch, useAppSelector} from '../../hooks';
-import NotFound from '../page-not-found/page-not-found';
+import NotFound from '../not-found/not-found';
 import {PlayButton} from '../../components/play-button/play-button';
 import {MyListButton} from '../../components/my-list-button/my-list-button';
 import {AuthorizationStatus, FILM_ROUTE} from '../../constants';
