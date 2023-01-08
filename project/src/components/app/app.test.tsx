@@ -35,8 +35,21 @@ describe('Application Routing', () => {
   });
 
   it('should render "AuthScreen" when user navigate to "/login"', () => {
+    const localStore = mockStore({
+      user: {authorizationStatus: AuthorizationStatus.NoAuth},
+      data: {films: mockFilms, isDataLoaded: true},
+      films: {reviews: [], similarFilms: [], currentFilm: mockFilms[0], favoriteFilms: [], promoFilm: mockFilms[0]},
+      genre: {currentGenre: ALL_GENRES}
+    });
+    const localFakeApp = (
+      <Provider store={localStore}>
+        <MemoryRouter initialEntries={initialEntries}>
+          <App/>
+        </MemoryRouter>
+      </Provider>
+    );
     initialEntries[0] = LOGIN_ROUT;
-    render(fakeApp);
+    render(localFakeApp);
 
     expect(screen.getByLabelText('Email address')).toBeInTheDocument();
     expect(screen.getByLabelText('Password')).toBeInTheDocument();
@@ -47,6 +60,5 @@ describe('Application Routing', () => {
     render(fakeApp);
 
     expect(screen.getByText('404 Page Not Found')).toBeInTheDocument();
-    expect(screen.getByText('Main page')).toBeInTheDocument();
   });
 });

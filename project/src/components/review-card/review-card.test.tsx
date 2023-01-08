@@ -16,7 +16,7 @@ describe('Component: NotFoundScreen', () => {
     );
 
     expect(screen.getByText('ok')).toBeInTheDocument();
-    expect(screen.getByText('01 Dec 2022')).toBeInTheDocument();
+    expect(screen.getByText('December 01, 2022')).toBeInTheDocument();
     expect(screen.getByText(5)).toBeInTheDocument();
     expect(screen.getByText('testUser')).toBeInTheDocument();
   });

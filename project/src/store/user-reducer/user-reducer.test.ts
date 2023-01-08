@@ -39,7 +39,7 @@ describe('Reducer: user', () => {
   it('should auth when check login success', () => {
     const user = {id:5, email: 'test@test', name:'userName'} as UserData;
     const state = {authorizationStatus: AuthorizationStatus.Auth, user: user};
-    expect(userReducer.reducer(state, {type: checkLoginAction.fulfilled.type}))
+    expect(userReducer.reducer(state, {type: checkLoginAction.fulfilled.type, payload: user}))
       .toEqual({authorizationStatus: AuthorizationStatus.Auth, user: user});
   });
 
