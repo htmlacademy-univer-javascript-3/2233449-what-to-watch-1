@@ -35,21 +35,21 @@ describe('Application Routing', () => {
   });
 
   it('should render "AuthScreen" when user navigate to "/login"', () => {
-    const store = mockStore({
+    const localStore = mockStore({
       user: {authorizationStatus: AuthorizationStatus.NoAuth},
       data: {films: mockFilms, isDataLoaded: true},
       films: {reviews: [], similarFilms: [], currentFilm: mockFilms[0], favoriteFilms: [], promoFilm: mockFilms[0]},
       genre: {currentGenre: ALL_GENRES}
     });
-    const fakeApp = (
-      <Provider store={store}>
+    const localFakeApp = (
+      <Provider store={localStore}>
         <MemoryRouter initialEntries={initialEntries}>
           <App/>
         </MemoryRouter>
       </Provider>
     );
     initialEntries[0] = LOGIN_ROUT;
-    render(fakeApp);
+    render(localFakeApp);
 
     expect(screen.getByLabelText('Email address')).toBeInTheDocument();
     expect(screen.getByLabelText('Password')).toBeInTheDocument();
